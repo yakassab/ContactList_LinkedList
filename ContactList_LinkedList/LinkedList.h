@@ -44,6 +44,8 @@ public:
     friend istream& operator>>(istream& in, LinkedList& aList);
      void read();
 
+     void write();
+
 };
 
 ostream& operator<<(ostream& out, const LinkedList& aList);

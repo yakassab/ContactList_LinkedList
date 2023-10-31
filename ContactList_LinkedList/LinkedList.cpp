@@ -180,6 +180,22 @@ void LinkedList::read()
     }
 }
 
+//save data
+void  LinkedList::write() {
+    ofstream myFileDelete("Contacts.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
+    myFileDelete.close();
+    ofstream myFileSave("Contacts.txt", ios::app); //saves data to file
+    NodePointer temp = first;
+    for (int x = 0; x < mySize; x++) {
+        myFileSave << temp->data ;
+        temp = temp->next;
+    }
+    myFileSave.close();
+
+    
+
+}
+
 //-- Definition of the output operator
 ostream& operator<<(ostream& out, const LinkedList& aList) {
     aList.display(out);
