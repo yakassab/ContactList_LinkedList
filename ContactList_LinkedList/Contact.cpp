@@ -144,11 +144,11 @@ istream& operator>>(istream& in, Contact& contact) {
 
 // cout<< operator
 ostream& operator<<(ostream& out, const Contact& contact) {
-	out << "First name: " << contact.firstName << endl;
-	out << "Last name: " << contact.lastName << endl;
-	out << "Phone number: " << contact.phoneNumber << endl;
-	out << "Email: " << contact.email << endl;
-	out << "Address: " << contact.address << endl;
+	out << contact.firstName << endl;
+	out << contact.lastName << endl;
+	out << contact.phoneNumber << endl;
+	out << contact.email << endl;
+	out << contact.address << endl;
 
 	return out;
 }
