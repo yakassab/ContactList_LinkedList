@@ -35,6 +35,7 @@ namespace ContactListLinkedList {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ button1;
 	protected:
 
 	private:
@@ -51,6 +52,7 @@ namespace ContactListLinkedList {
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -61,22 +63,32 @@ namespace ContactListLinkedList {
 			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->label1->Location = System::Drawing::Point(36, 155);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(492, 45);
+			this->label1->Size = System::Drawing::Size(481, 45);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Welcome To Our Project!";
 			this->label1->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(221, 267);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(18, 36);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(568, 383);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::SystemColors::ButtonShadow;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
-			this->Margin = System::Windows::Forms::Padding(7, 7, 7, 7);
+			this->Margin = System::Windows::Forms::Padding(7);
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
