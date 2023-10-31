@@ -12,10 +12,10 @@ namespace ContactListLinkedList {
 	/// <summary>
 	/// Summary for ainForm
 	/// </summary>
-	public ref class ainForm : public System::Windows::Forms::Form
+	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
-		ainForm(void)
+		MainForm(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace ContactListLinkedList {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~ainForm()
+		~MainForm()
 		{
 			if (components)
 			{
@@ -64,9 +64,9 @@ namespace ContactListLinkedList {
 			this->label1->Size = System::Drawing::Size(492, 45);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Welcome To Our Project!";
-			this->label1->Click += gcnew System::EventHandler(this, &ainForm::label1_Click);
+			this->label1->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
 			// 
-			// ainForm
+			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(18, 36);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -77,15 +77,15 @@ namespace ContactListLinkedList {
 			this->ForeColor = System::Drawing::SystemColors::ButtonShadow;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Margin = System::Windows::Forms::Padding(7, 7, 7, 7);
-			this->Name = L"ainForm";
+			this->Name = L"MainForm";
 			this->Text = L"MainForm";
-			this->Load += gcnew System::EventHandler(this, &ainForm::ainForm_Load);
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void ainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
