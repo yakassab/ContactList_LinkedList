@@ -1,5 +1,5 @@
 #pragma once
-ref class main
+ref class Contact
 {
 };
 
