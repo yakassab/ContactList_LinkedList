@@ -196,7 +196,6 @@ void LinkedList::read()
         }
         myfile.close();
     }
-  
 }
 
 //-- Definition of the output operator
