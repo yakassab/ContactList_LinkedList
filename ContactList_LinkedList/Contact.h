@@ -36,5 +36,10 @@ public:
 	bool isValidPhone(string phoneNumber);
 	bool isValidEmail(string email);
 	bool isValidAddress(string address);
+
+	friend bool operator==(const Contact& lhs, const Contact& rhs);
+	friend ostream& operator<<(ostream& out, const Contact& contact);
+
 };
 
+istream& operator>>(istream& in, Contact& contact);

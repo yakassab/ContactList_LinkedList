@@ -115,6 +115,42 @@ bool Contact::isValidAddress(string address)
 
 
 
+// operator== overload
+bool operator==(const Contact& lhs, const Contact& rhs){
 
+	return lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName;
+}
+
+// cin>> operator
+istream& operator>>(istream& in, Contact& contact) {
+	string firstName, lastName, phone, email, address;
+	cout << "Enter the first name: ";
+	in >> firstName;
+	cout << "Enter the last name: ";
+	in >> lastName;
+	cout << "Enter the phone number: ";
+	in >> phone;
+	cout << "Enter the email address: ";
+	in >> email;
+	cout << "Enter the address: ";
+	in >> address;
+	contact.setFirstName(firstName);
+	contact.setLastName(lastName);
+	contact.setPhoneNumber(phone);
+	contact.setEmail(email);
+	contact.setAddress(address);
+	return in;
+}
+
+// cout<< operator
+ostream& operator<<(ostream& out, const Contact& contact) {
+	out << "First name: " << contact.firstName << endl;
+	out << "Last name: " << contact.lastName << endl;
+	out << "Phone number: " << contact.phoneNumber << endl;
+	out << "Email: " << contact.email << endl;
+	out << "Address: " << contact.address << endl;
+
+	return out;
+}
 
 
