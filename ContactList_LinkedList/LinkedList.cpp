@@ -162,21 +162,21 @@ void LinkedList::reverse() {
 
 void LinkedList::read()
 {
-    string firstname, lastname, email, phone, address;
+    string firstName, lastName, email, phone, address;
     int count = 0;
-    ifstream myfile("Contacts.txt");
-    if (myfile.is_open()) {
-        while ((myfile.peek()) != EOF) {
-            getline(myfile, firstname);
-            getline(myfile, lastname);
-            getline(myfile, email);
-            getline(myfile, phone);
-            getline(myfile, address);
-            Contact temp(firstname, lastname, email, phone, address);
+    ifstream myFile("Contacts.txt");
+    if (myFile.is_open()) {
+        while ((myFile.peek()) != EOF) {
+            getline(myFile, firstName);
+            getline(myFile, lastName);
+            getline(myFile, email);
+            getline(myFile, phone);
+            getline(myFile, address);
+            Contact temp(firstName, lastName, email, phone, address);
             insert(temp, count);
             count++;
         }
-        myfile.close();
+        myFile.close();
     }
 }
 
