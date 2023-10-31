@@ -2,6 +2,10 @@
 #define LList
 
 #include <iostream>
+#include<fstream>
+#include <cstdlib>
+#include <stdlib.h>
+#include <string>
 #include "Contact.h"
 using namespace std;
 typedef Contact ElementType;
@@ -39,10 +43,12 @@ public:
     bool ascendingOrder(); // Check if the elements of this list are in ascending order.
     // End of Extra ----------------------------------------------------------------------------
     friend istream& operator>>(istream& in, LinkedList& aList);
+     void read();
 
 };
 
 ostream& operator<<(ostream& out, const LinkedList& aList);
 istream& operator>>(istream& in, LinkedList& aList);
+void read();
 
 #endif /* LList */

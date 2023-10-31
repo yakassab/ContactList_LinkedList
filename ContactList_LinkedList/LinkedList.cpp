@@ -1,6 +1,8 @@
 #include "LinkedList.h"
 
-
+#include<fstream>
+#include <cstdlib>
+#include <stdlib.h>
 //-- Definition of the class constructor
 LinkedList::LinkedList() : first(0), mySize(0) {}
 
@@ -174,6 +176,27 @@ bool LinkedList::ascendingOrder() {
         return false;
     // else
     return true;
+}
+
+void LinkedList::read()
+{
+    string firstname, lastname, email, phone, address;
+    int count = 0;
+    ifstream myfile("Contacts.txt");
+    if (myfile.is_open()) {
+        while ((myfile.peek()) != EOF) {
+            getline(myfile, firstname);
+            getline(myfile, lastname);
+            getline(myfile, email);
+            getline(myfile, phone);
+            getline(myfile, address);
+            Contact temp(firstname, lastname, email, phone, address);
+            insert(temp, count);
+            count++;
+        }
+        myfile.close();
+    }
+  
 }
 
 //-- Definition of the output operator
