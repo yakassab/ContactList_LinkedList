@@ -1,4 +1,5 @@
 #include "MainForm.h"
+#include <iostream>
 using namespace ContactListLinkedList;
 [STAThreadAttribute]
 int main(array<System::String^>^ args)
@@ -8,6 +9,8 @@ int main(array<System::String^>^ args)
 	Application::SetCompatibleTextRenderingDefault(false);
 	// Create the main window and run it
 	Application::Run(gcnew MainForm());
+
+	std::cout << "Press any key to continue..." << std::endl;
 	return 0;
 }
 

@@ -11,8 +11,12 @@ private:
 	string address;
 
 public:
+
+	//----------------Constructors----------------//
 	Contact();
 	Contact(string firstName, string lastName, string phoneNumber, string email, string address);
+	
+	//----------------Destructor----------------//
 	~Contact();
 
 	//---------Getters & Setters------------//
@@ -26,6 +30,7 @@ public:
 	void setPhoneNumber(string phoneNumber);
 	void setEmail(string email);
 	void setAddress(string address);
+
 	//----------------Checks----------------//
 	bool isValidName(string name);
 	bool isValidPhone(string phoneNumber);

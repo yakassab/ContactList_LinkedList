@@ -33,7 +33,7 @@ inline LinkedList::~LinkedList() {
 }
 
 // Definition of empty()
-bool LinkedList::empty() {
+bool LinkedList::empty() const {
     return mySize == 0;
 }
 
@@ -111,7 +111,7 @@ void LinkedList::erase(int index) {
 }
 
 //-- Definition of search()
-int LinkedList::search(ElementType dataVal) {
+int LinkedList::search(ElementType dataVal) const {
     int loc;
     LinkedList::NodePointer tempP = first;
     for (loc = 0; loc < mySize; loc++)
@@ -133,7 +133,7 @@ void LinkedList::display(ostream& out) const {
 }
 
 //-- Definition of nodeCount()
-int LinkedList::nodeCount() {
+int LinkedList::nodeCount() const {
     int count = 0;
     LinkedList::NodePointer ptr = first;
     while (ptr != 0)
@@ -159,24 +159,6 @@ void LinkedList::reverse() {
     first = prevP;       // new head of (reversed) linked list
 }
 
-//-- Definition of ascendingOrder()
-bool LinkedList::ascendingOrder() {
-    if (mySize <= 1)
-        //empty or one element list
-        return true;
-    //else
-    NodePointer prevP = first,
-        tempP = first->next;
-    while (tempP != 0 && prevP->data <= tempP->data)
-    {
-        prevP = tempP;
-        tempP = tempP->next;
-    }
-    if (tempP != 0)
-        return false;
-    // else
-    return true;
-}
 
 void LinkedList::read()
 {
