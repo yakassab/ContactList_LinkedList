@@ -4,22 +4,25 @@ using namespace std;
 class Contact
 {
 private:
-	string name;
+	string firstName;
+	string lastName;
 	string phoneNumber;
 	string email;
 	string address;
 
 public:
 	Contact();
-	Contact(string name, string phoneNumber, string email, string address);
+	Contact(string firstName, string lastName, string phoneNumber, string email, string address);
 	~Contact();
 
 	//---------Getters & Setters------------//
-	string getName();
+	string getFirstName();
+	string getLastName();
 	string getPhone();
 	string getEmail();
 	string getAddress();
-	void setName(string name);
+	void setFirstName(string fisrtName);
+	void setLastName(string lastName);
 	void setPhoneNumber(string phoneNumber);
 	void setEmail(string email);
 	void setAddress(string address);

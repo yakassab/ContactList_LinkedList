@@ -4,9 +4,10 @@ Contact::Contact()
 {
 }
 
-Contact::Contact(string name, string phone, string email, string address)
+Contact::Contact(string firstName, string lastName, string phone, string email, string address)
 {
-	this->name = name;
+	this->firstName = firstName;
+	this->lastName = lastName;
 	this->phoneNumber = phone;
 	this->email = email;
 	this->address = address;
@@ -16,9 +17,14 @@ Contact::~Contact()
 {
 }
 
-string Contact::getName()
+string Contact::getFirstName()
 {
-	return name;
+	return firstName;
+}
+
+string Contact::getLastName()
+{
+	return lastName;
 }
 
 string Contact::getPhone()
@@ -36,10 +42,15 @@ string Contact::getAddress()
 	return address;
 }	
 
-void Contact::setName(string name)
+void Contact::setFirstName(string firstName)
 {
-	this->name = name;
-}	
+	this->firstName = firstName;
+}
+
+void Contact::setLastName(string lastName)
+{
+	this->lastName = lastName;
+}
 
 void Contact::setPhoneNumber(string phone)
 {
