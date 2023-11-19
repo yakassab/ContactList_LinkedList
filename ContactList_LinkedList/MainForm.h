@@ -161,7 +161,6 @@ namespace ContactListLinkedList {
 		// Read the list from the file.
 		list.read();
 		
-		
 
 		// Create a ptr that points to the first node of the list.
 		LinkedList::NodePointer ptr = list.first;

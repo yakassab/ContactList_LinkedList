@@ -6,6 +6,8 @@ Contact::Contact()
 
 Contact::Contact(string firstName, string lastName, string phone, string email, string address)
 {
+	firstName[0] = toupper(firstName[0]);
+	lastName[0] = toupper(lastName[0]);
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->phoneNumber = phone;
