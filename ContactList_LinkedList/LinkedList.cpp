@@ -194,8 +194,21 @@ void  LinkedList::write() {
     }
     myFileSave.close();
 
+}
+
+void LinkedList::sort()
+{
+    //write code to sort the linked list ascendingly accordning to first name.
+
     
 
+
+    //write code to sort the linked list ascendingly accordning to last name.
+
+
+
+
+    
 }
 
 //-- Definition of the output operator

@@ -43,8 +43,8 @@ public:
     // End of Extra ----------------------------------------------------------------------------
     friend istream& operator>>(istream& in, LinkedList& aList);
      void read();
-
      void write();
+     void sort();
 
 };
 
