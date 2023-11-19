@@ -11,7 +11,7 @@ using namespace std;
 typedef Contact ElementType;
 
 class LinkedList {
-private:
+public:
     // Nested node class
     class Node {
     public:

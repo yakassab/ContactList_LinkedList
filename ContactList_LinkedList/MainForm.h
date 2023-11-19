@@ -1,4 +1,6 @@
 #pragma once
+#include "LinkedList.h"
+#include "Contact.h"
 
 namespace ContactListLinkedList {
 
@@ -34,8 +36,12 @@ namespace ContactListLinkedList {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::ListBox^ ContactsListBox;
+	protected:
+
+	protected:
+
+
 	protected:
 
 	private:
@@ -51,55 +57,62 @@ namespace ContactListLinkedList {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->ContactsListBox = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
-			// label1
+			// ContactsListBox
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 25.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label1->Location = System::Drawing::Point(36, 155);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(481, 45);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Welcome To Our Project!";
-			this->label1->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(221, 267);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"button1";
-			this->button1->UseVisualStyleBackColor = true;
+			this->ContactsListBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->ContactsListBox->FormattingEnabled = true;
+			this->ContactsListBox->ItemHeight = 52;
+			this->ContactsListBox->Location = System::Drawing::Point(17, 101);
+			this->ContactsListBox->Name = L"ContactsListBox";
+			this->ContactsListBox->Size = System::Drawing::Size(459, 368);
+			this->ContactsListBox->TabIndex = 0;
+			this->ContactsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::listBox1_SelectedIndexChanged);
 			// 
 			// MainForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(18, 36);
+			this->AutoScaleDimensions = System::Drawing::SizeF(26, 52);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(568, 383);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->label1);
-			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->ClientSize = System::Drawing::Size(488, 491);
+			this->Controls->Add(this->ContactsListBox);
+			this->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::SystemColors::ButtonShadow;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
-			this->Margin = System::Windows::Forms::Padding(7);
+			this->Margin = System::Windows::Forms::Padding(10);
 			this->Name = L"MainForm";
-			this->Text = L"MainForm";
+			this->Text = L"Contacts";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e){
+		LinkedList list;
+		list.read();
+		//create a ptr that points to the first node of the list
+		LinkedList::NodePointer ptr = list.first;
+		int i = 0;
+		//add first name of each contact to the list box.
+		while (ptr != NULL) {
+			ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+			ptr = ptr->next;
+		}
+
+
+		
+		
+
+
+		list.write();
 	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+
+	
+	private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }
