@@ -50,6 +50,6 @@ public:
 
 ostream& operator<<(ostream& out, const LinkedList& aList);
 istream& operator>>(istream& in, LinkedList& aList);
-void read();
+
 
 #endif /* LList */

@@ -127,9 +127,11 @@ void LinkedList::display(ostream& out) const {
     LinkedList::NodePointer ptr = first;
     while (ptr != 0)
     {
-        out << ptr->data << "  ";
+        out << ptr->data;
         ptr = ptr->next;
+        cout << endl;
     }
+    
 }
 
 //-- Definition of nodeCount()
@@ -164,7 +166,7 @@ void LinkedList::read()
 {
     string firstName, lastName, email, phone, address;
     int count = 0;
-    ifstream myFile("Contacts.txt");
+    ifstream myFile("contactstest.txt");
     if (myFile.is_open()) {
         while ((myFile.peek()) != EOF) {
             getline(myFile, firstName);
@@ -182,9 +184,9 @@ void LinkedList::read()
 
 //save data
 void  LinkedList::write() {
-    ofstream myFileDelete("Contacts.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
+    ofstream myFileDelete("contactstest.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
     myFileDelete.close();
-    ofstream myFileSave("Contacts.txt", ios::app); //saves data to file
+    ofstream myFileSave("contactstest.txt", ios::app); //saves data to file
     NodePointer temp = first;
     for (int x = 0; x < mySize; x++) {
         myFileSave << temp->data ;
