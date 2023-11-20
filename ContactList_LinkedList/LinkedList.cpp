@@ -110,17 +110,46 @@ void LinkedList::erase(int index) {
     }
 }
 
-//-- Definition of search()
-int LinkedList::search(ElementType dataVal) const {
-    int loc;
-    LinkedList::NodePointer tempP = first;
-    for (loc = 0; loc < mySize; loc++)
-        if (tempP->data == dataVal)
-            return loc;
-        else
-            tempP = tempP->next;
-    return -1;
+LinkedList::NodePointer LinkedList::search(string firstname, string lastname) const
+{
+    Node* ptr = first;
+    while (ptr != 0)
+    {
+        if ((ptr->data.getFirstName() == firstname) && (ptr->data.getLastName() == lastname))
+        {
+			return ptr;
+		}
+		ptr = ptr->next;
+	}
+	return 0;   // not found
 }
+
+
+void LinkedList::erase(string firstname, string lastname)
+{
+    NodePointer ptr = search(firstname, lastname);
+    NodePointer ptr2 = first;
+    int counter = 0;
+    if (ptr == 0) {
+        return;
+    }
+    else {
+        while (ptr2 != 0) {
+            if (ptr2 == ptr) {
+				erase(counter);
+				break;
+			}
+			else {
+				counter++;
+			}
+            ptr2 = ptr2->next;
+        }
+    }
+		
+   
+
+}
+
 
 //-- Definition of display()
 void LinkedList::display(ostream& out) const {
@@ -134,32 +163,8 @@ void LinkedList::display(ostream& out) const {
     
 }
 
-//-- Definition of nodeCount()
-int LinkedList::nodeCount() const {
-    int count = 0;
-    LinkedList::NodePointer ptr = first;
-    while (ptr != 0)
-    {
-        count++;
-        ptr = ptr->next;
-    }
-    return count;
-}   // or simply,  { return mySize; }
 
-//-- Definition of reverse()
-void LinkedList::reverse() {
-    NodePointer prevP = 0,
-        currentP = first,
-        nextP;
-    while (currentP != 0)
-    {
-        nextP = currentP->next;
-        currentP->next = prevP;
-        prevP = currentP;
-        currentP = nextP;
-    }
-    first = prevP;       // new head of (reversed) linked list
-}
+
 
 
 void LinkedList::read()
@@ -223,12 +228,6 @@ void LinkedList::sort()
 		ptr1 = first;
 		ptr2 = ptr1->next;
 	}
-
-
-    
-
-
-
     
 }
 
