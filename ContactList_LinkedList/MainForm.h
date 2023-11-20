@@ -160,6 +160,8 @@ namespace ContactListLinkedList {
 
 		// Read the list from the file.
 		list.read();
+
+		//list.insert(Contact("John", "Doe", "123-456-7890", "123 Main St.", "new York"),0);
 		
 		// Sort the list.
 		list.sort();
@@ -178,7 +180,8 @@ namespace ContactListLinkedList {
 		
 		
 
-		// Write the list to the file.
+		/* Write the list to the file.
+		====THIS IS FOR TESTING PURPOSES ONLY, REMOVE LATER====*/
 		list.write();
 	}
 

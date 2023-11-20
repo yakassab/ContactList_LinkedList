@@ -43,7 +43,7 @@ public:
     // End of Extra ----------------------------------------------------------------------------
     friend istream& operator>>(istream& in, LinkedList& aList);
      void read();
-     void write();
+     void write() const;
      void swap(NodePointer a, NodePointer b);
      void sort();
 
