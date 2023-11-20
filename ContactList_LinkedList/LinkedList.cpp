@@ -110,6 +110,7 @@ void LinkedList::erase(int index) {
     }
 }
 
+// Definition of search by first name and last name.
 LinkedList::NodePointer LinkedList::search(string firstname, string lastname) const
 {
     Node* ptr = first;
@@ -124,7 +125,7 @@ LinkedList::NodePointer LinkedList::search(string firstname, string lastname) co
 	return 0;   // not found
 }
 
-
+// Erase a contact by first name and last name.
 void LinkedList::erase(string firstname, string lastname)
 {
     NodePointer ptr = search(firstname, lastname);
