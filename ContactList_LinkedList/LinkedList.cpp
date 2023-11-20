@@ -189,22 +189,43 @@ void  LinkedList::write() {
     ofstream myFileSave("contactstest.txt", ios::app); //saves data to file
     NodePointer temp = first;
     for (int x = 0; x < mySize; x++) {
-        myFileSave << temp->data ;
+        myFileSave << temp->data;
         temp = temp->next;
     }
     myFileSave.close();
 
 }
 
+void LinkedList::swap(NodePointer a, NodePointer b){
+Contact temp = a->data;
+	a->data = b->data;
+	b->data = temp;
+}
+
 void LinkedList::sort()
 {
-    //write code to sort the linked list ascendingly accordning to first name.
+    //write code to sort the linked list ascendingly according to first name and last name.
+
+
+
+    NodePointer ptr1 = first;
+    NodePointer ptr2 = ptr1->next;
+
+
+    for (int i = 0; i < mySize; i++) {
+		for (int j = 0; j < mySize - 1; j++) {
+			if ((ptr1->data.getFirstName()+ " " + ptr1->data.getLastName())> (ptr2->data.getFirstName() + " " + ptr2->data.getLastName())) {
+				swap(ptr1, ptr2);
+			}
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
+		}
+		ptr1 = first;
+		ptr2 = ptr1->next;
+	}
+
 
     
-
-
-    //write code to sort the linked list ascendingly accordning to last name.
-
 
 
 

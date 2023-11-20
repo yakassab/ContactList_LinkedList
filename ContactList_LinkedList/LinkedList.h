@@ -44,6 +44,7 @@ public:
     friend istream& operator>>(istream& in, LinkedList& aList);
      void read();
      void write();
+     void swap(NodePointer a, NodePointer b);
      void sort();
 
 };
