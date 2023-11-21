@@ -210,9 +210,7 @@ Contact temp = a->data;
 
 void LinkedList::sort()
 {
-    //write code to sort the linked list ascendingly according to first name and last name.
-
-
+    if (empty())return;
 
     NodePointer ptr1 = first;
     NodePointer ptr2 = ptr1->next;
