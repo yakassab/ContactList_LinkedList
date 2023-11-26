@@ -3,10 +3,10 @@
 #include<fstream>
 #include <cstdlib>
 #include <stdlib.h>
-//-- Definition of the class constructor
+// default class constructor
 LinkedList::LinkedList() : first(0), mySize(0) {}
 
-//-- Definition of the copy constructor
+//copy constructor
 LinkedList::LinkedList(const LinkedList& origList) : first(0), mySize(origList.mySize) {
     if (mySize == 0) return;
     LinkedList::NodePointer origPtr, lastPtr;
@@ -21,7 +21,7 @@ LinkedList::LinkedList(const LinkedList& origList) : first(0), mySize(origList.m
     }
 }
 
-//-- Definition of the destructor
+// destructor
 inline LinkedList::~LinkedList() {
     LinkedList::NodePointer prev = first, ptr;
     while (prev != 0)
@@ -32,12 +32,13 @@ inline LinkedList::~LinkedList() {
     }
 }
 
-// Definition of empty()
+// checks if list is emoty
 bool LinkedList::empty() const {
     return mySize == 0;
 }
 
-//-- Definition of the assignment operator
+
+// assignment operator overloading
 const LinkedList& LinkedList::operator=(const LinkedList& rightSide) {
     mySize = rightSide.mySize;
 
@@ -63,13 +64,10 @@ const LinkedList& LinkedList::operator=(const LinkedList& rightSide) {
     return *this;
 }
 
-//-- Definition of insert()
+// insert new contact to new node to list at index
 void LinkedList::insert(ElementType dataVal, int index) {
-    if (index < 0 || index > mySize)
-    {
-        cerr << "Illegal location to insert -- " << index << endl;
-        return;
-    }
+    if (index < 0 || index > mySize)return;
+    
     mySize++;
     LinkedList::NodePointer newPtr = new Node(dataVal), predPtr = first;
     if (index == 0)
@@ -85,13 +83,10 @@ void LinkedList::insert(ElementType dataVal, int index) {
     }
 }
 
-//-- Definition of erase()
+// erase node by index
 void LinkedList::erase(int index) {
-    if (index < 0 || index >= mySize)
-    {
-        cerr << "Illegal location to delete -- " << index << endl;
-        return;
-    }
+    if (index < 0 || index >= mySize)return;
+    
     mySize--;
     LinkedList::NodePointer ptr,
         predPtr = first;
@@ -110,7 +105,7 @@ void LinkedList::erase(int index) {
     }
 }
 
-// Definition of search by first name and last name.
+// search for node by first name and last name.
 LinkedList::NodePointer LinkedList::search(string firstname, string lastname) const
 {
     Node* ptr = first;
@@ -122,12 +117,15 @@ LinkedList::NodePointer LinkedList::search(string firstname, string lastname) co
 		}
 		ptr = ptr->next;
 	}
-	return 0;   // not found
+	return 0;
 }
 
 // Erase a contact by first name and last name.
 void LinkedList::erase(string firstname, string lastname)
 {
+    if(empty())return;
+    firstname[0] = toupper(firstname[0]);
+    lastname[0] = toupper(lastname[0]);
     NodePointer ptr = search(firstname, lastname);
     NodePointer ptr2 = first;
     int counter = 0;
@@ -152,8 +150,9 @@ void LinkedList::erase(string firstname, string lastname)
 }
 
 
-//-- Definition of display()
+// function to display all contacts
 void LinkedList::display(ostream& out) const {
+    if (empty())return;
     LinkedList::NodePointer ptr = first;
     while (ptr != 0)
     {
@@ -167,7 +166,7 @@ void LinkedList::display(ostream& out) const {
 
 
 
-
+// read list from file.
 void LinkedList::read()
 {
     string firstName, lastName, email, phone, address;
@@ -188,7 +187,7 @@ void LinkedList::read()
     }
 }
 
-//save data
+// write list to file.
 void  LinkedList::write() const {
     ofstream myFileDelete("contactstest.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
     myFileDelete.close();
@@ -202,12 +201,15 @@ void  LinkedList::write() const {
 
 }
 
+// swap function for sort
 void LinkedList::swap(NodePointer a, NodePointer b){
 Contact temp = a->data;
 	a->data = b->data;
 	b->data = temp;
 }
 
+
+// sort list in alphabetical order
 void LinkedList::sort()
 {
     if (empty())return;
@@ -230,16 +232,17 @@ void LinkedList::sort()
     
 }
 
-//-- Definition of the output operator
+// output operator overloading
 ostream& operator<<(ostream& out, const LinkedList& aList) {
     aList.display(out);
     return out;
 }
 
-//-- Definition of the input operator
+// input operator overloading
 istream& operator>>(istream& in, LinkedList& aList) {
     ElementType val;
     in >> val;
-    aList.insert(val, aList.mySize); // Needed friend to access "mySize"
+    aList.insert(val, aList.mySize);
     return in;
 }
+

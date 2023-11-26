@@ -3,11 +3,6 @@ Alooka
 1234567890
 sth@hotmail.net
 123 Main St.
-Alice
-Johnson
-9876543210
-alice.johnson@gmail.com
-234 Elm St
 Bob
 Johnson
 5551234567
@@ -48,16 +43,6 @@ Smith
 9876543210
 jane.smith@gmail.com
 456 Oak St
-John
-Smith
-123-456-7890
-123 Main St.
-lolo
-John
-Snith
-123-456-7890
-123 Main St.
-lolo
 Mohamed
 Ooka
 123-456-7890

@@ -134,6 +134,7 @@ namespace ContactListLinkedList {
 			this->ContactsListBox->Name = L"ContactsListBox";
 			this->ContactsListBox->Size = System::Drawing::Size(479, 368);
 			this->ContactsListBox->TabIndex = 4;
+			this->ContactsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ContactsListBox_SelectedIndexChanged);
 			// 
 			// MainForm
 			// 
@@ -163,9 +164,9 @@ namespace ContactListLinkedList {
 		list.read();
 
 		//list.insert(Contact("mohamed", "zoka", "123-456-7890", "123 Main St.", "new York"),0);
-		//list.erase("Mohamed", "Zoka");
-		//list.erase(13);
-		
+		//list.erase("John", "Smith");
+		//list.erase(1);
+
 		// Sort the list.
 		list.sort();
 
@@ -198,5 +199,7 @@ namespace ContactListLinkedList {
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		////ana hena 3ayz a3ml form gdeda
 	}
+private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

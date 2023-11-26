@@ -15,6 +15,7 @@ public:
 	//----------------Constructors----------------//
 	Contact();
 	Contact(string firstName, string lastName, string phoneNumber, string email, string address);
+	Contact(const Contact& contact);
 	
 	//----------------Destructor----------------//
 	~Contact();
