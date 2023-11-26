@@ -108,6 +108,7 @@ namespace ContactListLinkedList {
 			this->searchButton->TabIndex = 2;
 			this->searchButton->Text = L"Search";
 			this->searchButton->UseVisualStyleBackColor = true;
+			this->searchButton->Click += gcnew System::EventHandler(this, &MainForm::searchButton_Click);
 			// 
 			// addButton
 			// 
@@ -195,5 +196,9 @@ namespace ContactListLinkedList {
 		int index = ContactsListBox->SelectedIndex;
 
 	}
-	};
+	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }
