@@ -1,0 +1,70 @@
+Ali
+Alooka
+1234567890
+sth@hotmail.net
+123 Main St.
+Alice
+Johnson
+9876543210
+alice.johnson@gmail.com
+234 Elm St
+Bob
+Johnson
+5551234567
+bob.johnson@gmail.com
+789 Pine St
+Charlie
+Brown
+5559876543
+charlie.brown@gmail.com
+567 Maple St
+David
+Miller
+5553334444
+david.miller@gmail.com
+123 Pine St
+Eva
+White
+1237894560
+eva.white@gmail.com
+890 Birch St
+Frank
+Williams
+5551112222
+frank.williams@gmail.com
+789 Maple St
+Grace
+Lee
+1234567890
+grace.lee@gmail.com
+456 Oak St
+Hannah
+Taylor
+5554445555
+hannah.taylor@gmail.com
+101 Pine St
+Jane
+Smith
+9876543210
+jane.smith@gmail.com
+456 Oak St
+John
+Smith
+123-456-7890
+123 Main St.
+lolo
+John
+Snith
+123-456-7890
+123 Main St.
+lolo
+Mohamed
+Ooka
+123-456-7890
+123 Main St.
+new York
+Youssef
+Kassab
+01004055176
+kassab@gmail.com
+ibn fadlan

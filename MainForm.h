@@ -120,7 +120,6 @@ namespace ContactListLinkedList {
 			this->addButton->TabIndex = 3;
 			this->addButton->Text = L"Add";
 			this->addButton->UseVisualStyleBackColor = true;
-			this->addButton->Click += gcnew System::EventHandler(this, &MainForm::addButton_Click);
 			// 
 			// ContactsListBox
 			// 
