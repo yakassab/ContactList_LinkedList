@@ -1,5 +1,5 @@
 #include "LinkedList.h"
-
+#include "Contact.h"
 #include<fstream>
 #include <cstdlib>
 #include <stdlib.h>
@@ -65,24 +65,29 @@ const LinkedList& LinkedList::operator=(const LinkedList& rightSide) {
 
 //-- Definition of insert()
 void LinkedList::insert(ElementType dataVal, int index) {
-    if (index < 0 || index > mySize)
-    {
-        cerr << "Illegal location to insert -- " << index << endl;
-        return;
+    if (dataVal.isValidName(dataVal.getFirstName()) && dataVal.isValidName(dataVal.getLastName()) && dataVal.isValidPhone(dataVal.getPhone()) && dataVal.isValidEmail(dataVal.getEmail()) && dataVal.isValidAddress(dataVal.getAddress())) {
+        if (index < 0 || index > mySize)
+        {
+            cerr << "Illegal location to insert -- " << index << endl;
+            return;
+        }
+        mySize++;
+        LinkedList::NodePointer newPtr = new Node(dataVal), predPtr = first;
+        if (index == 0)
+        {
+            newPtr->next = first;
+            first = newPtr;
+        }
+        else {
+            for (int i = 1; i < index; i++)
+                predPtr = predPtr->next;
+            newPtr->next = predPtr->next;
+            predPtr->next = newPtr;
+        }
     }
-    mySize++;
-    LinkedList::NodePointer newPtr = new Node(dataVal), predPtr = first;
-    if (index == 0)
-    {
-        newPtr->next = first;
-        first = newPtr;
-    }
-    else {
-        for (int i = 1; i < index; i++)
-            predPtr = predPtr->next;
-        newPtr->next = predPtr->next;
-        predPtr->next = newPtr;
-    }
+	else{
+		cerr<<"Invalid input"<<endl;
+	}
 }
 
 //-- Definition of erase()

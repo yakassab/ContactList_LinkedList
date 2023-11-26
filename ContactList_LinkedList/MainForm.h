@@ -163,9 +163,9 @@ namespace ContactListLinkedList {
 		// Read the list from the file.
 		list.read();
 
-		//list.insert(Contact("mohamed", "zoka", "123-456-7890", "123 Main St.", "new York"),0);
+		//list.insert(Contact("Mohamed", "Zoka", "01234567890", "mohamed@gmail.com", "new York"),0);
 		//list.erase("Mohamed", "Zoka");
-		//list.erase(13);
+		list.erase(0);
 		
 		// Sort the list.
 		list.sort();
