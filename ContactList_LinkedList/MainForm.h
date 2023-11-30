@@ -74,9 +74,6 @@ namespace ContactListLinkedList {
 			this->ContactsListBox = (gcnew System::Windows::Forms::ListBox());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// tableLayoutPanel1
-			// 
 			this->tableLayoutPanel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -96,9 +93,6 @@ namespace ContactListLinkedList {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
 			this->tableLayoutPanel1->Size = System::Drawing::Size(485, 460);
 			this->tableLayoutPanel1->TabIndex = 1;
-			// 
-			// searchButton
-			// 
 			this->searchButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -109,9 +103,6 @@ namespace ContactListLinkedList {
 			this->searchButton->Text = L"Search";
 			this->searchButton->UseVisualStyleBackColor = true;
 			this->searchButton->Click += gcnew System::EventHandler(this, &MainForm::searchButton_Click);
-			// 
-			// addButton
-			// 
 			this->addButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -122,9 +113,6 @@ namespace ContactListLinkedList {
 			this->addButton->Text = L"Add";
 			this->addButton->UseVisualStyleBackColor = true;
 			this->addButton->Click += gcnew System::EventHandler(this, &MainForm::addButton_Click);
-			// 
-			// ContactsListBox
-			// 
 			this->ContactsListBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -135,9 +123,6 @@ namespace ContactListLinkedList {
 			this->ContactsListBox->Name = L"ContactsListBox";
 			this->ContactsListBox->Size = System::Drawing::Size(479, 368);
 			this->ContactsListBox->TabIndex = 4;
-			// 
-			// MainForm
-			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(26, 52);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(509, 484);
@@ -165,8 +150,8 @@ namespace ContactListLinkedList {
 
 		list.insert(Contact("john", "Aly", "01206437599", "ahmedd@gmail.com", "new York"),0);
 
-		//list.erase("Mohamed", "Zoka");
-		//list.erase(0);
+	//	list.erase("John", "Aly");
+		//list.erase(1);
 		
 		// Sort the list.
 		list.sort();
