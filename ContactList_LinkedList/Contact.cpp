@@ -1,12 +1,9 @@
 #include "Contact.h"
 #include <regex>
-
-// default constructor
 Contact::Contact()
 {
 }
 
-// class constructor
 Contact::Contact(string firstName, string lastName, string phone, string email, string address)
 {
 	firstName[0] = toupper(firstName[0]);
@@ -18,23 +15,10 @@ Contact::Contact(string firstName, string lastName, string phone, string email, 
 	this->address = address;
 }
 
-// copy constructor
-Contact::Contact(const Contact& contact)
-{
-	firstName = contact.firstName;
-	lastName = contact.lastName;
-	phoneNumber = contact.phoneNumber;
-	email = contact.email;
-	address = contact.address;
-}
-
-// destructor
 Contact::~Contact()
 {
-	
 }
 
-//getters and setters
 string Contact::getFirstName()
 {
 	return firstName;
@@ -85,7 +69,6 @@ void Contact::setAddress(string address)
 	this->address = address;
 }
 
-// Checks
 bool Contact::isValidName(string name) {
 	// Check if the name is empty.
 	if (name.empty()) {
