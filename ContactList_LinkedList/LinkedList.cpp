@@ -133,6 +133,8 @@ LinkedList::NodePointer LinkedList::search(string firstname, string lastname) co
 // Erase a contact by first name and last name.
 void LinkedList::erase(string firstname, string lastname)
 {
+    firstname[0] = toupper(firstname[0]);
+	lastname[0] = toupper(lastname[0]);
     NodePointer ptr = search(firstname, lastname);
     NodePointer ptr2 = first;
     int counter = 0;
