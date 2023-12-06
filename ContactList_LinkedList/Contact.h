@@ -39,7 +39,7 @@ public:
 
 	friend bool operator==(const Contact& lhs, const Contact& rhs);
 	friend ostream& operator<<(ostream& out, const Contact& contact);
-
+	const Contact& operator=(const Contact& rightSide);
 };
 
 istream& operator>>(istream& in, Contact& contact);
