@@ -114,6 +114,19 @@ bool Contact::isValidAddress(string address)
 {
 	return !address.empty();
 }
+//operator = overload
+const Contact& Contact::operator=(const Contact& rightSide)
+{
+	
+	if (this != &rightSide) {
+		firstName = rightSide.firstName;
+		lastName = rightSide.lastName;
+		phoneNumber = rightSide.phoneNumber;
+		email = rightSide.email;
+		address = rightSide.address;
+	}
+	return *this;
+}
 
 
 

@@ -108,6 +108,7 @@ namespace ContactListLinkedList {
 			this->searchButton->TabIndex = 2;
 			this->searchButton->Text = L"Search";
 			this->searchButton->UseVisualStyleBackColor = true;
+			this->searchButton->Click += gcnew System::EventHandler(this, &MainForm::searchButton_Click);
 			// 
 			// addButton
 			// 
@@ -162,9 +163,10 @@ namespace ContactListLinkedList {
 		// Read the list from the file.
 		list.read();
 
-		//list.insert(Contact("mohamed", "zoka", "123-456-7890", "123 Main St.", "new York"),0);
-		//list.erase("Mohamed", "Zoka");
-		//list.erase(13);
+		//list.insert(Contact("john", "Aly", "01206437599", "ahmedd@gmail.com", "new York"),0);
+
+		//list.erase("John", "Aly");
+		//list.erase(1);
 		
 		// Sort the list.
 		list.sort();
@@ -195,8 +197,9 @@ namespace ContactListLinkedList {
 		int index = ContactsListBox->SelectedIndex;
 
 	}
+	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		////ana hena 3ayz a3ml form gdeda
 	}
 };
 }
