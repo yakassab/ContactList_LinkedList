@@ -203,13 +203,12 @@ namespace ContactListLinkedList {
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
-
 		// Create an instance of the Add form
 		ContactListLinkedList::addForm^ addForm = gcnew ContactListLinkedList::addForm();
 		// Show the Add form
 		System::Windows::Forms::DialogResult result = addForm->ShowDialog();
-		//close main form after opening the add form
-		
+		// Dispose of the form after use
+		addForm->Dispose();
 	}
 };
 }
