@@ -1,6 +1,7 @@
 #pragma once
 #include "LinkedList.h"
 #include "Contact.h"
+#include "addForm.h"
 
 namespace ContactListLinkedList {
 
@@ -202,6 +203,10 @@ namespace ContactListLinkedList {
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Create an instance of the Add form
+		ContactListLinkedList::addForm^ addForm = gcnew ContactListLinkedList::addForm();
+		// Dispose of the form after use
+		addForm->Dispose();
 	}
 };
 }

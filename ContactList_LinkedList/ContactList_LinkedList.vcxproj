@@ -120,12 +120,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="addForm.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="addForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Contact.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="MainForm.h">
@@ -133,6 +137,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="addForm.resx">
+      <DependentUpon>addForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
