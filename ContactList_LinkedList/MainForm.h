@@ -208,7 +208,7 @@ namespace ContactListLinkedList {
 		// Show the Add form
 		System::Windows::Forms::DialogResult result = addForm->ShowDialog();
 		// Dispose of the form after use
-		addForm->Dispose();
+		
 	}
 };
 }
