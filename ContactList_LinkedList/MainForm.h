@@ -102,6 +102,7 @@ namespace ContactListLinkedList {
 			this->searchButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->searchButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->searchButton->Location = System::Drawing::Point(245, 379);
 			this->searchButton->Name = L"searchButton";
 			this->searchButton->Size = System::Drawing::Size(237, 78);
@@ -115,6 +116,7 @@ namespace ContactListLinkedList {
 			this->addButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->addButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->addButton->Location = System::Drawing::Point(3, 379);
 			this->addButton->Name = L"addButton";
 			this->addButton->Size = System::Drawing::Size(236, 78);
@@ -163,7 +165,7 @@ namespace ContactListLinkedList {
 		// Read the list from the file.
 		list.read();
 
-		list.insert(Contact("youssef", "kassab", "01206437599", "ahmedd@gmail.com", "new York"),0);
+		//list.insert(Contact("youssef", "kassab", "01206437599", "ahmedd@gmail.com", "new York"),0);
 
 		//list.erase("youssef", "ayman");
 		//list.erase(1);
