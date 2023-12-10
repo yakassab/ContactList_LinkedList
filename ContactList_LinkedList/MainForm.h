@@ -168,7 +168,7 @@ namespace ContactListLinkedList {
 
 		//list.insert(Contact("youssef", "kassab", "01206437599", "ahmedd@gmail.com", "new York"),0);
 
-		//list.erase("youssef", "ayman");
+		//list.erase("youssef", "kassab");
 		//list.erase(1);
 		
 		// Sort the list.
@@ -203,12 +203,10 @@ namespace ContactListLinkedList {
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Create an instance of the Add form
-		ContactListLinkedList::addForm^ addForm = gcnew ContactListLinkedList::addForm();
-		// Show the Add form
-		System::Windows::Forms::DialogResult result = addForm->ShowDialog();
-		// Dispose of the form after use
-		
+		//write code to move from one form to another
+		addForm^ form = gcnew addForm(this);
+		form->ShowDialog();
+
 	}
 };
 }

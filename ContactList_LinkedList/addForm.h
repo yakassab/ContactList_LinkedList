@@ -1,5 +1,7 @@
 #pragma once
-
+#include "Contact.h"
+#include "LinkedList.h"
+//#include "MainForm.h"
 namespace ContactListLinkedList {
 
 	using namespace System;
@@ -15,8 +17,17 @@ namespace ContactListLinkedList {
 	public ref class addForm : public System::Windows::Forms::Form
 	{
 	public:
+		Form^ mainForm;
 		addForm(void)
 		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+		addForm(Form^ f)
+		{
+			mainForm = f;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -248,6 +259,7 @@ namespace ContactListLinkedList {
 			this->btn_save->TabIndex = 1;
 			this->btn_save->Text = L"Save";
 			this->btn_save->UseVisualStyleBackColor = true;
+			this->btn_save->Click += gcnew System::EventHandler(this, &addForm::btn_save_Click);
 			// 
 			// addForm
 			// 
@@ -269,6 +281,7 @@ namespace ContactListLinkedList {
 			this->MinimumSize = System::Drawing::Size(387, 469);
 			this->Name = L"addForm";
 			this->Text = L"addForm";
+			this->Load += gcnew System::EventHandler(this, &addForm::addForm_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -283,6 +296,21 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 	this->tb_phoneNumber->Text = " ";
 	this->tb_email->Text = " ";
 	this->tb_address->Text = " ";
+}
+private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
+	LinkedList list;
+	list.read();
+	//list.insert(Contact("tru", "gordy", "01206437599", "ahmedd@gmail.com", "new York"), 0);
+	
+	this->Hide();
+	//write code to create new main form
+	
+    mainForm->Show();
+
+	
+}
+private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	mainForm->Hide();
 }
 };
 }
