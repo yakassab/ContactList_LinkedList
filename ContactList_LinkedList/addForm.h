@@ -301,7 +301,8 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 	LinkedList list;
 	list.read();
 	//list.insert(Contact("tru", "gordy", "01206437599", "ahmedd@gmail.com", "new York"), 0);
-	
+	//list.erase("tru", "gordy");
+	list.write();
 	this->Hide();
 	//write code to create new main form
 	

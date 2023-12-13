@@ -206,7 +206,22 @@ namespace ContactListLinkedList {
 		//write code to move from one form to another
 		addForm^ form = gcnew addForm(this);
 		form->ShowDialog();
+		LinkedList list;
+		list.read();
 
+		// Sort the list.
+		list.sort();
+
+		// Create a ptr that points to the first node of the list.
+		LinkedList::NodePointer ptr = list.first;
+		int i = 0;
+
+		ContactsListBox->Items->Clear();
+		// Add first name and last name of each contact to the list box.
+		while (ptr != NULL) {
+			ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+			ptr = ptr->next;
+		}
 	}
 };
 }
