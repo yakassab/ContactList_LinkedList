@@ -1,171 +1,117 @@
 #include "Contact.h"
-#include <regex>
-Contact::Contact()
-{
+using namespace System::Collections::Generic;
+using namespace std;
+using namespace System;
+// Constructor
+Contact::Contact() {
+	// Initialize members as needed
+	firstName = "";
+	lastName = "";
+	phoneNumber = "";
+	email = "";
+	address = "";
+}
+// Destructor
+Contact::~Contact() {
+	// Cleanup, if needed
 }
 
-Contact::Contact(string firstName, string lastName, string phone, string email, string address)
-{
-	firstName[0] = toupper(firstName[0]);
-	lastName[0] = toupper(lastName[0]);
-	this->firstName = firstName;
-	this->lastName = lastName;
-	this->phoneNumber = phone;
-	this->email = email;
-	this->address = address;
-}
+//---------Getters & Setters------------//
 
-Contact::~Contact()
-{
-}
-
-string Contact::getFirstName()
-{
+String^ Contact::getFirstName() {
 	return firstName;
 }
 
-string Contact::getLastName()
-{
+String^ Contact::getLastName() {
 	return lastName;
 }
 
-string Contact::getPhone()
-{
+String^ Contact::getPhone() {
 	return phoneNumber;
 }
 
-string Contact::getEmail()
-{
+String^ Contact::getEmail() {
 	return email;
 }
 
-string Contact::getAddress()
-{
+String^ Contact::getAddress() {
 	return address;
-}	
-
-void Contact::setFirstName(string firstName)
-{
-	this->firstName = firstName;
 }
 
-void Contact::setLastName(string lastName)
-{
-	this->lastName = lastName;
+void Contact::setFirstName(String^ newFirstName) {
+	firstName = newFirstName;
 }
 
-void Contact::setPhoneNumber(string phone)
-{
-	this->phoneNumber = phone;
-}	
-
-void Contact::setEmail(string email)
-{
-	this->email = email;
+void Contact::setLastName(String^ newLastName) {
+	lastName = newLastName;
 }
 
-void Contact::setAddress(string address)
-{
-	this->address = address;
+void Contact::setPhoneNumber(String^ newPhoneNumber) {
+	phoneNumber = newPhoneNumber;
 }
 
-bool Contact::isValidName(string name) {
-	// Check if the name is empty.
-	if (name.empty()) {
-		return false;
-	}
-	// Check if the first character is a letter.
-	if (!isalpha(name[0])) {
-		return false;
-	}
-	return true;
+void Contact::setEmail(String^ newEmail) {
+	email = newEmail;
 }
 
-bool Contact::isValidPhone(string phoneNumber)
-{
-	// Check if the phone number is 11 characters long.
-	if (phoneNumber.size() != 11) {
-		return false;
-	}
-
-	// Check if the phone number starts with 01.
-	if (phoneNumber.substr(0, 2) != "01") {
-		return false;
-	}
-
-	// Check if the remaining characters are digits.
-	for (int i = 2; i < phoneNumber.size(); ++i) {
-		if (!isdigit(phoneNumber[i])) {
-			return false;
-		}
-	}
-	return true;
+bool Contact::isValidName(String^ name) {
+    // Check if the name is empty.
+    if (String::IsNullOrEmpty(name)) {
+        return false;
+    }
+    // Check if the first character is a letter.
+    if (!Char::IsLetter(name[0])) {
+        return false;
+    }
+    return true;
 }
 
-bool Contact::isValidEmail(string email)
-{
-	regex emailRegex("[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*");
+bool Contact::isValidPhone(String^ phoneNumber) {
+    // Check if the phone number is 11 characters long.
+    if (phoneNumber->Length != 11) {
+        return false;
+    }
 
-	// Match the email address against the regular expression.
-	return regex_match(email, emailRegex);
+    // Check if the phone number starts with "01".
+    if (!phoneNumber->StartsWith("01")) {
+        return false;
+    }
+
+    // Check if the remaining characters are digits.
+    for each (Char c in phoneNumber->Substring(2)) {
+        if (!Char::IsDigit(c)) {
+            return false;
+        }
+    }
+    return true;
 }
 
-bool Contact::isValidAddress(string address)
-{
-	return !address.empty();
+bool Contact::isValidEmail(String^ email) {
+        // Match the email address against the regular expression.
+        System::Text::RegularExpressions::Regex^ emailRegex = gcnew System::Text::RegularExpressions::Regex("[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*");
+        return emailRegex->IsMatch(email);
 }
-//operator = overload
-const Contact& Contact::operator=(const Contact& rightSide)
-{
-	
-	if (this != &rightSide) {
-		firstName = rightSide.firstName;
-		lastName = rightSide.lastName;
-		phoneNumber = rightSide.phoneNumber;
-		email = rightSide.email;
-		address = rightSide.address;
-	}
-	return *this;
+
+bool Contact::isValidAddress(String^ address) {
+    return !String::IsNullOrEmpty(address);
+}
+
+// Comparison operators
+bool Contact::operator==(const Contact^ rhs) {
+	// Implement your comparison logic here
+	return this->firstName == rhs->firstName && this->lastName == rhs->lastName;
+}
+
+bool Contact::operator!=(const Contact^ rhs) {
+	return !(*this == rhs);
 }
 
 
 
-// operator== overload
-bool operator==(const Contact& lhs, const Contact& rhs){
 
-	return lhs.firstName == rhs.firstName && lhs.lastName == rhs.lastName;
-}
 
-// cin>> operator
-istream& operator>>(istream& in, Contact& contact) {
-	string firstName, lastName, phone, email, address;
-	cout << "Enter the first name: ";
-	in >> firstName;
-	cout << "Enter the last name: ";
-	in >> lastName;
-	cout << "Enter the phone number: ";
-	in >> phone;
-	cout << "Enter the email address: ";
-	in >> email;
-	cout << "Enter the address: ";
-	in >> address;
-	contact.setFirstName(firstName);
-	contact.setLastName(lastName);
-	contact.setPhoneNumber(phone);
-	contact.setEmail(email);
-	contact.setAddress(address);
-	return in;
-}
 
-// cout<< operator
-ostream& operator<<(ostream& out, const Contact& contact) {
-	out << contact.firstName << endl;
-	out << contact.lastName << endl;
-	out << contact.phoneNumber << endl;
-	out << contact.email << endl;
-	out << contact.address << endl;
 
-	return out;
-}
+
 
 

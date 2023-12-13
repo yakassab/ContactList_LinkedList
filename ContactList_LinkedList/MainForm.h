@@ -1,5 +1,5 @@
 #pragma once
-#include "LinkedList.h"
+#include "LinkedList.cpp"
 #include "Contact.h"
 #include "addForm.h"
 

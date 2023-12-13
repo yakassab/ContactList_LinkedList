@@ -1,7 +1,7 @@
 #pragma once
 #include "Contact.h"
-#include "LinkedList.h"
-//#include "MainForm.h"
+#include "LinkedList.cpp"
+#include "MainForm.h"
 namespace ContactListLinkedList {
 
 	using namespace System;

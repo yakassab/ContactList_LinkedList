@@ -1,252 +1,231 @@
-#include "LinkedList.h"
+
+#pragma once
+using namespace System;
+using namespace System::Collections::Generic;
+using namespace std;
+#include <iostream>
+#include <string>
+#include <vcclr.h>
+#include <fstream>
 #include "Contact.h"
-#include<fstream>
-#include <cstdlib>
-#include <stdlib.h>
-//-- Definition of the class constructor
-LinkedList::LinkedList() : first(0), mySize(0) {}
 
-//-- Definition of the copy constructor
-LinkedList::LinkedList(const LinkedList& origList) : first(0), mySize(origList.mySize) {
-    if (mySize == 0) return;
-    LinkedList::NodePointer origPtr, lastPtr;
-    first = new Node(origList.first->data);  // copy first node
-    lastPtr = first;
-    origPtr = origList.first->next;
-    while (origPtr != 0)
-    {
-        lastPtr->next = new Node(origPtr->data);
+using namespace System;
+using namespace System::Collections::Generic;
+using namespace std;
+typedef Contact ElementType;
+public ref class LinkedList {
+public:
+    // Nested node class
+    ref class Node {
+    public:
+        Contact^ data;
+        Node^ next;
+
+        Node() : next(nullptr) {}
+        Node(Contact^ dataValue) : data(dataValue), next(nullptr) {}
+    };
+
+    typedef Node^ NodePointer;
+    NodePointer first;
+    int mySize;
+
+public:
+    LinkedList() {
+        first = nullptr;
+        mySize = 0;
+    }
+    LinkedList(const LinkedList^ origList) {
+        first = nullptr;
+        mySize = origList->mySize;
+        if (mySize == 0) return;
+
+        Node^ origPtr = origList->first;
+        first = gcnew Node(origPtr->data);  // copy first node
+        Node^ lastPtr = first;
+
         origPtr = origPtr->next;
-        lastPtr = lastPtr->next;
-    }
-}
 
-//-- Definition of the destructor
-inline LinkedList::~LinkedList() {
-    LinkedList::NodePointer prev = first, ptr;
-    while (prev != 0)
-    {
-        ptr = prev->next;
-        delete prev;
-        prev = ptr;
-    }
-}
-
-// Definition of empty()
-bool LinkedList::empty() const {
-    return mySize == 0;
-}
-
-//-- Definition of the assignment operator
-const LinkedList& LinkedList::operator=(const LinkedList& rightSide) {
-    mySize = rightSide.mySize;
-
-    if (mySize == 0) {
-        first = 0;
-        return *this;
-    }
-    if (this != &rightSide)
-    {
-        this->~LinkedList();
-        LinkedList::NodePointer origPtr, lastPtr;
-        first = new Node(rightSide.first->data);  // copy first node
-        lastPtr = first;
-        origPtr = rightSide.first->next;
-
-        while (origPtr != 0)
-        {
-            lastPtr->next = new Node(origPtr->data);
+        while (origPtr != nullptr) {
+            lastPtr->next = gcnew Node(origPtr->data);
             origPtr = origPtr->next;
             lastPtr = lastPtr->next;
         }
     }
-    return *this;
-}
+    ~LinkedList() {
+        Node^ prev = first;
+        Node^ ptr;
 
-//-- Definition of insert()
-void LinkedList::insert(ElementType dataVal, int index) {
-    if (dataVal.isValidName(dataVal.getFirstName()) && dataVal.isValidName(dataVal.getLastName()) && dataVal.isValidPhone(dataVal.getPhone()) && dataVal.isValidEmail(dataVal.getEmail()) && dataVal.isValidAddress(dataVal.getAddress())) {
-        if (index < 0 || index > mySize)
-        {
-            cerr << "Illegal location to insert -- " << index << endl;
+        while (prev != nullptr) {
+            ptr = prev->next;
+            delete prev;
+            prev = ptr;
+        }
+    }
+    const LinkedList^ operator=(const LinkedList^ rightSide) {
+
+    }
+    bool empty() {
+        return mySize == 0;
+    }
+    void insert(Contact^ dataVal, int index) {
+        if (index < 0 || index > mySize) {
+            Console::WriteLine("Illegal location to insert -- {0}", index);
             return;
         }
+
         mySize++;
-        LinkedList::NodePointer newPtr = new Node(dataVal), predPtr = first;
-        if (index == 0)
-        {
+        Node^ newPtr = gcnew Node(dataVal);
+        Node^ predPtr = first;
+
+        if (index == 0) {
             newPtr->next = first;
             first = newPtr;
         }
         else {
             for (int i = 1; i < index; i++)
                 predPtr = predPtr->next;
+
             newPtr->next = predPtr->next;
             predPtr->next = newPtr;
         }
     }
-	else{
-		cerr<<"Invalid input"<<endl;
-	}
-}
+    void erase(int index) {
+        if (index < 0 || index >= mySize) {
+            Console::WriteLine("Illegal location to delete -- {0}", index);
+            return;
+        }
 
-//-- Definition of erase()
-void LinkedList::erase(int index) {
-    if (index < 0 || index >= mySize)
-    {
-        cerr << "Illegal location to delete -- " << index << endl;
-        return;
-    }
-    mySize--;
-    LinkedList::NodePointer ptr,
-        predPtr = first;
-    if (index == 0)
-    {
-        ptr = first;
-        first = ptr->next;
-        delete ptr;
-    }
-    else {
-        for (int i = 1; i < index; i++)
-            predPtr = predPtr->next;
-        ptr = predPtr->next;
-        predPtr->next = ptr->next;
-        delete ptr;
-    }
-}
+        mySize--;
+        Node^ ptr;
+        Node^ predPtr = first;
 
-// Definition of search by first name and last name.
-LinkedList::NodePointer LinkedList::search(string firstname, string lastname) const
-{
-    Node* ptr = first;
-    while (ptr != 0)
-    {
-        if ((ptr->data.getFirstName() == firstname) && (ptr->data.getLastName() == lastname))
-        {
-			return ptr;
-		}
-		ptr = ptr->next;
-	}
-	return 0;   // not found
-}
+        if (index == 0) {
+            ptr = first;
+            first = ptr->next;
+            delete ptr;
+        }
+        else {
+            for (int i = 1; i < index; i++)
+                predPtr = predPtr->next;
 
-// Erase a contact by first name and last name.
-void LinkedList::erase(string firstname, string lastname)
-{
-    firstname[0] = toupper(firstname[0]);
-	lastname[0] = toupper(lastname[0]);
-    NodePointer ptr = search(firstname, lastname);
-    NodePointer ptr2 = first;
-    int counter = 0;
-    if (ptr == 0) {
-        return;
-    }
-    else {
-        while (ptr2 != 0) {
-            if (ptr2 == ptr) {
-				erase(counter);
-				break;
-			}
-			else {
-				counter++;
-			}
-            ptr2 = ptr2->next;
+            ptr = predPtr->next;
+            predPtr->next = ptr->next;
+            delete ptr;
         }
     }
-		
-   
+    void erase(String^ firstname, String^ lastname) {
+        Node^ ptr = search(firstname, lastname);
+        Node^ ptr2 = first;
+        int counter = 0;
 
-}
-
-
-//-- Definition of display()
-void LinkedList::display(ostream& out) const {
-    LinkedList::NodePointer ptr = first;
-    while (ptr != 0)
-    {
-        out << ptr->data;
-        ptr = ptr->next;
-        cout << endl;
-    }
-    
-}
-
-
-
-
-
-void LinkedList::read()
-{
-    string firstName, lastName, email, phone, address;
-    int count = 0;
-    ifstream myFile("contactstest.txt");
-    if (myFile.is_open()) {
-        while ((myFile.peek()) != EOF) {
-            getline(myFile, firstName);
-            getline(myFile, lastName);
-            getline(myFile, email);
-            getline(myFile, phone);
-            getline(myFile, address);
-            Contact temp(firstName, lastName, email, phone, address);
-            insert(temp, count);
-            count++;
+        if (ptr == nullptr) {
+            return;
         }
-        myFile.close();
+        else {
+            while (ptr2 != nullptr) {
+                if (ptr2 == ptr) {
+                    erase(counter);
+                    break;
+                }
+                else {
+                    counter++;
+                }
+                ptr2 = ptr2->next;
+            }
+        }
     }
-}
+    NodePointer search(String^ firstname, String^ lastname) {
+        Node^ ptr = first;
 
-//save data
-void  LinkedList::write() const {
-    ofstream myFileDelete("contactstest.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
-    myFileDelete.close();
-    ofstream myFileSave("contactstest.txt", ios::app); //saves data to file
-    NodePointer temp = first;
-    for (int x = 0; x < mySize; x++) {
-        myFileSave << temp->data;
-        temp = temp->next;
+        while (ptr != nullptr) {
+            if (ptr->data->getFirstName() == firstname && ptr->data->getLastName() == lastname) {
+                return ptr;
+            }
+            ptr = ptr->next;
+        }
+
+        return nullptr; // not found
     }
-    myFileSave.close();
+    void display(ostream& out) {
+        Node^ ptr = first;
 
-}
+        while (ptr != nullptr) {
+            out << ptr->data;
+            ptr = ptr->next;
+            Console::WriteLine();
+        }
+    }
+    void read() {
+        String^ firstName;
+        String^ lastName;
+        String^ email;
+        String^ phone;
+        String^ address;
+        int count = 0;
 
-void LinkedList::swap(NodePointer a, NodePointer b){
-Contact temp = a->data;
-	a->data = b->data;
-	b->data = temp;
-}
+        System::IO::StreamReader^ myFile = gcnew System::IO::StreamReader("contactstest.txt");
+        if (myFile->Peek() != -1) {  // Check if the file is not empty
+            while (!myFile->EndOfStream) {
+                firstName = myFile->ReadLine();
+                lastName = myFile->ReadLine();
+                email = myFile->ReadLine();
+                phone = myFile->ReadLine();
+                address = myFile->ReadLine();
 
-void LinkedList::sort()
-{
-    if (empty())return;
+                Contact^ temp = gcnew Contact(firstName, lastName, email, phone, address);
+                insert(temp, count);
+                count++;
+            }
+        }
+        myFile->Close();
+    }
+    void write(){
+        ofstream myFileDelete("contactstest.txt", std::ofstream::out | std::ofstream::trunc); // clears data in file
+        myFileDelete.close();
 
-    NodePointer ptr1 = first;
-    NodePointer ptr2 = ptr1->next;
+        ofstream myFileSave("contactstest.txt", ios::app); // saves data to file
+        Node^ temp = first;
+
+        for (int x = 0; x < mySize; x++) {
+            myFileSave << temp->data;
+            temp = temp->next;
+        }
+
+        myFileSave.close();
+    }
+    void swap(NodePointer a, NodePointer b){
+        Contact^ temp = a->data;
+        a->data = b->data;
+        b->data = temp;
+    }
+    void sort(){
+        Node^ ptr1 = first;
+        Node^ ptr2 = ptr1->next;
+
+        for (int i = 0; i < mySize; i++) {
+            for (int j = 0; j < mySize - 1; j++) {
+                if ((ptr1->data->getFirstName() + " " + ptr1->data->getLastName()) >
+                    (ptr2->data->getFirstName() + " " + ptr2->data->getLastName())) {
+                    swap(ptr1, ptr2);
+                }
+                ptr1 = ptr1->next;
+                ptr2 = ptr2->next;
+            }
+            ptr1 = first;
+            ptr2 = ptr1->next;
+        }
+    }
+    //// Input operator for managed code
+    //LinkedList% operator>>(ElementType val) {
+    //    insert(val, mySize); // Assuming ElementType is the type you want to read
+    //    return *this;
+    //}
+    // Output operator for managed code
+    LinkedList% operator<<(ostream% out) {
+        display(out);
+        return *this;
+    }
+};
 
 
-    for (int i = 0; i < mySize; i++) {
-		for (int j = 0; j < mySize - 1; j++) {
-			if ((ptr1->data.getFirstName()+ " " + ptr1->data.getLastName())> (ptr2->data.getFirstName() + " " + ptr2->data.getLastName())) {
-				swap(ptr1, ptr2);
-			}
-			ptr1 = ptr1->next;
-			ptr2 = ptr2->next;
-		}
-		ptr1 = first;
-		ptr2 = ptr1->next;
-	}
-    
-}
 
-//-- Definition of the output operator
-ostream& operator<<(ostream& out, const LinkedList& aList) {
-    aList.display(out);
-    return out;
-}
-
-//-- Definition of the input operator
-istream& operator>>(istream& in, LinkedList& aList) {
-    ElementType val;
-    in >> val;
-    aList.insert(val, aList.mySize); // Needed friend to access "mySize"
-    return in;
-}

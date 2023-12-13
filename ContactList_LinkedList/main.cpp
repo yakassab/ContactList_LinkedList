@@ -1,5 +1,5 @@
 #include "MainForm.h"
-#include "LinkedList.h"
+#include "LinkedList.cpp"
 #include <iostream>
 using namespace std;
 using namespace ContactListLinkedList;
