@@ -2,6 +2,7 @@
 #include "Contact.h"
 #include "LinkedList.h"
 //#include "MainForm.h"
+#include <msclr\marshal_cppstd.h>
 namespace ContactListLinkedList {
 
 	using namespace System;
@@ -300,8 +301,18 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
 	LinkedList list;
 	list.read();
-	//list.insert(Contact("tru", "gordy", "01206437599", "ahmedd@gmail.com", "new York"), 0);
+	
+	if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_address->Text == "")
+	{
+		MessageBox::Show("Please fill out all fields");
+		return;
+	} else{
+		list.insert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(tb_address->Text)), 0);
+	}
+
+	//list.insert(c, 0);
 	//list.erase("tru", "gordy");
+	//list.erase(0);
 	list.write();
 	this->Hide();
 	//write code to create new main form

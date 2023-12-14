@@ -65,7 +65,7 @@ const LinkedList& LinkedList::operator=(const LinkedList& rightSide) {
 
 //-- Definition of insert()
 void LinkedList::insert(ElementType dataVal, int index) {
-    if (dataVal.isValidName(dataVal.getFirstName()) && dataVal.isValidName(dataVal.getLastName()) && dataVal.isValidPhone(dataVal.getPhone()) && dataVal.isValidEmail(dataVal.getEmail()) && dataVal.isValidAddress(dataVal.getAddress())) {
+    
         if (index < 0 || index > mySize)
         {
             cerr << "Illegal location to insert -- " << index << endl;
@@ -85,10 +85,8 @@ void LinkedList::insert(ElementType dataVal, int index) {
             predPtr->next = newPtr;
         }
     }
-	else{
-		cerr<<"Invalid input"<<endl;
-	}
-}
+	
+
 
 //-- Definition of erase()
 void LinkedList::erase(int index) {
