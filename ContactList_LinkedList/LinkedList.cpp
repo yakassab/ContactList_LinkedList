@@ -235,6 +235,15 @@ void LinkedList::sort()
     
 }
 
+Contact LinkedList::getContact(int index)
+{
+	NodePointer ptr = first;
+	for (int i = 0; i < index; i++) {
+		ptr = ptr->next;
+	}
+	return ptr->data;
+}
+
 //-- Definition of the output operator
 ostream& operator<<(ostream& out, const LinkedList& aList) {
     aList.display(out);

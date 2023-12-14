@@ -42,7 +42,7 @@ public:
      void write() const;
      void swap(NodePointer a, NodePointer b);
      void sort();
-
+     Contact getContact(int index);
 
      friend istream& operator>>(istream& in, LinkedList& aList);
 

@@ -2,7 +2,7 @@
 #include "LinkedList.h"
 #include "Contact.h"
 #include "addForm.h"
-
+#include "DetailsForm.h"
 namespace ContactListLinkedList {
 
 	using namespace System;
@@ -138,6 +138,7 @@ namespace ContactListLinkedList {
 			this->ContactsListBox->Name = L"ContactsListBox";
 			this->ContactsListBox->Size = System::Drawing::Size(479, 368);
 			this->ContactsListBox->TabIndex = 4;
+			this->ContactsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ContactsListBox_SelectedIndexChanged);
 			// 
 			// MainForm
 			// 
@@ -188,9 +189,7 @@ namespace ContactListLinkedList {
 		
 		
 
-		/* Write the list to the file.
-		====THIS IS FOR TESTING PURPOSES ONLY, REMOVE LATER====*/
-		list.write();
+		
 	}
 
 
@@ -223,5 +222,23 @@ namespace ContactListLinkedList {
 			ptr = ptr->next;
 		}
 	}
+private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	
+	//get the index of the selected item
+	int index = ContactsListBox->SelectedIndex;
+
+	LinkedList list;
+
+	list.read();
+	
+	
+    String^ name = gcnew String((list.getContact(index).getFirstName() + " " + list.getContact(index).getLastName()).c_str());
+	String^ phoneNumber = gcnew String(list.getContact(index).getPhone().c_str());
+	String^ email = gcnew String(list.getContact(index).getEmail().c_str());
+	String^ address = gcnew String(list.getContact(index).getAddress().c_str());
+
+	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address);
+	form->ShowDialog();
+}	
 };
 }
