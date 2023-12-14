@@ -169,7 +169,7 @@ namespace ContactListLinkedList {
 		//list.erase(0);
 		//list.insert(Contact("youssef", "kassab", "01206437599", "ahmedd@gmail.com", "new York"),0);
 
-		//list.erase("youssef", "kassab");
+		//list.erase("Rdgdxgr", "Sefse");
 		//list.erase(1);
 		
 		// Sort the list.
@@ -188,7 +188,7 @@ namespace ContactListLinkedList {
 
 		
 		
-
+		list.write();
 		
 	}
 
@@ -230,7 +230,8 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	LinkedList list;
 
 	list.read();
-	
+	list.sort();
+
 	
     String^ name = gcnew String((list.getContact(index).getFirstName() + " " + list.getContact(index).getLastName()).c_str());
 	String^ phoneNumber = gcnew String(list.getContact(index).getPhone().c_str());
