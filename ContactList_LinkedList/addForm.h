@@ -301,12 +301,39 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
 	LinkedList list;
 	list.read();
-	
+	Contact c;
 	if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_address->Text == "")
 	{
 		MessageBox::Show("Please fill out all fields");
 		return;
-	} else{
+	}
+	else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
+	{
+		MessageBox::Show("Please enter a valid first name");
+		return;
+	}
+	else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
+	{
+		MessageBox::Show("Please enter a valid last name");
+		return;
+	}
+	else if (!c.isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
+	{
+		MessageBox::Show("Please enter a valid phone number");
+		return;
+	}
+	else if (!c.isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
+	{
+		MessageBox::Show("Please enter a valid email");
+		return;
+
+	}
+	else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(tb_address->Text)))
+	{
+		MessageBox::Show("Please enter a valid address");
+		return;
+	}
+	else{
 		list.insert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(tb_address->Text)), 0);
 	}
 
