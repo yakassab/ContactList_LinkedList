@@ -72,6 +72,8 @@ namespace ContactListLinkedList {
 	private: System::Windows::Forms::Button^ btn_clear;
 
 	private: System::Windows::Forms::Button^ btn_save;
+	private: System::Windows::Forms::Button^ cancelButton;
+
 
 
 	private:
@@ -98,8 +100,9 @@ namespace ContactListLinkedList {
 			this->tb_lastname = (gcnew System::Windows::Forms::TextBox());
 			this->tb_email = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->btn_clear = (gcnew System::Windows::Forms::Button());
+			this->cancelButton = (gcnew System::Windows::Forms::Button());
 			this->btn_save = (gcnew System::Windows::Forms::Button());
+			this->btn_clear = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -110,9 +113,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->lbl_firstname->Location = System::Drawing::Point(12, 9);
 			this->lbl_firstname->Name = L"lbl_firstname";
-			this->lbl_firstname->Size = System::Drawing::Size(98, 25);
+			this->lbl_firstname->Size = System::Drawing::Size(106, 25);
 			this->lbl_firstname->TabIndex = 0;
-			this->lbl_firstname->Text = L"Firstname";
+			this->lbl_firstname->Text = L"First Name";
 			// 
 			// lbl_lastname
 			// 
@@ -121,9 +124,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->lbl_lastname->Location = System::Drawing::Point(12, 70);
 			this->lbl_lastname->Name = L"lbl_lastname";
-			this->lbl_lastname->Size = System::Drawing::Size(98, 25);
+			this->lbl_lastname->Size = System::Drawing::Size(106, 25);
 			this->lbl_lastname->TabIndex = 1;
-			this->lbl_lastname->Text = L"Lastname";
+			this->lbl_lastname->Text = L"Last Name";
 			// 
 			// lbl_phoneNumber
 			// 
@@ -157,7 +160,6 @@ namespace ContactListLinkedList {
 			this->lbl_address->Size = System::Drawing::Size(85, 25);
 			this->lbl_address->TabIndex = 4;
 			this->lbl_address->Text = L"Address";
-			this->lbl_address->Click += gcnew System::EventHandler(this, &addForm::label5_Click);
 			// 
 			// tb_address
 			// 
@@ -218,13 +220,16 @@ namespace ContactListLinkedList {
 			// 
 			this->tableLayoutPanel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->tableLayoutPanel1->ColumnCount = 2;
+			this->tableLayoutPanel1->ColumnCount = 3;
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
-			this->tableLayoutPanel1->Controls->Add(this->btn_clear, 0, 0);
-			this->tableLayoutPanel1->Controls->Add(this->btn_save, 1, 0);
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				121)));
+			this->tableLayoutPanel1->Controls->Add(this->cancelButton, 0, 0);
+			this->tableLayoutPanel1->Controls->Add(this->btn_save, 2, 0);
+			this->tableLayoutPanel1->Controls->Add(this->btn_clear, 1, 0);
 			this->tableLayoutPanel1->Location = System::Drawing::Point(12, 325);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 1;
@@ -232,20 +237,20 @@ namespace ContactListLinkedList {
 			this->tableLayoutPanel1->Size = System::Drawing::Size(345, 85);
 			this->tableLayoutPanel1->TabIndex = 10;
 			// 
-			// btn_clear
+			// cancelButton
 			// 
-			this->btn_clear->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+			this->cancelButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->btn_clear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->cancelButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_clear->Location = System::Drawing::Point(3, 3);
-			this->btn_clear->Name = L"btn_clear";
-			this->btn_clear->Size = System::Drawing::Size(166, 79);
-			this->btn_clear->TabIndex = 0;
-			this->btn_clear->Text = L"Clear";
-			this->btn_clear->UseVisualStyleBackColor = true;
-			this->btn_clear->Click += gcnew System::EventHandler(this, &addForm::btn_clear_Click);
+			this->cancelButton->Location = System::Drawing::Point(3, 3);
+			this->cancelButton->Name = L"cancelButton";
+			this->cancelButton->Size = System::Drawing::Size(106, 79);
+			this->cancelButton->TabIndex = 2;
+			this->cancelButton->Text = L"Cancel";
+			this->cancelButton->UseVisualStyleBackColor = true;
+			this->cancelButton->Click += gcnew System::EventHandler(this, &addForm::button1_Click);
 			// 
 			// btn_save
 			// 
@@ -254,13 +259,28 @@ namespace ContactListLinkedList {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->btn_save->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_save->Location = System::Drawing::Point(175, 3);
+			this->btn_save->Location = System::Drawing::Point(227, 3);
 			this->btn_save->Name = L"btn_save";
-			this->btn_save->Size = System::Drawing::Size(167, 79);
+			this->btn_save->Size = System::Drawing::Size(115, 79);
 			this->btn_save->TabIndex = 1;
 			this->btn_save->Text = L"Save";
 			this->btn_save->UseVisualStyleBackColor = true;
 			this->btn_save->Click += gcnew System::EventHandler(this, &addForm::btn_save_Click);
+			// 
+			// btn_clear
+			// 
+			this->btn_clear->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->btn_clear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_clear->Location = System::Drawing::Point(115, 3);
+			this->btn_clear->Name = L"btn_clear";
+			this->btn_clear->Size = System::Drawing::Size(106, 79);
+			this->btn_clear->TabIndex = 0;
+			this->btn_clear->Text = L"Clear";
+			this->btn_clear->UseVisualStyleBackColor = true;
+			this->btn_clear->Click += gcnew System::EventHandler(this, &addForm::btn_clear_Click);
 			// 
 			// addForm
 			// 
@@ -289,14 +309,13 @@ namespace ContactListLinkedList {
 
 		}
 #pragma endregion
-	private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
+	
 private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->tb_firstname->Text = " ";
-	this->tb_lastname->Text = " ";
-	this->tb_phoneNumber->Text = " ";
-	this->tb_email->Text = " ";
-	this->tb_address->Text = " ";
+	this->tb_firstname->Text = "";
+	this->tb_lastname->Text = "";
+	this->tb_phoneNumber->Text = "";
+	this->tb_email->Text = "";
+	this->tb_address->Text = "";
 }
 private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
 	LinkedList list;
@@ -326,7 +345,6 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 	{
 		MessageBox::Show("Please enter a valid email");
 		return;
-
 	}
 	else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(tb_address->Text)))
 	{
@@ -337,19 +355,20 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 		list.insert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(tb_address->Text)), 0);
 	}
 
-	//list.insert(c, 0);
-	//list.erase("tru", "gordy");
-	//list.erase(0);
 	list.write();
+
+
 	this->Hide();
-	//write code to create new main form
-	
     mainForm->Show();
 
 	
 }
 private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	mainForm->Hide();
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	mainForm->Show();
 }
 };
 }
