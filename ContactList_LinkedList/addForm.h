@@ -72,6 +72,7 @@ namespace ContactListLinkedList {
 	private: System::Windows::Forms::Button^ btn_clear;
 
 	private: System::Windows::Forms::Button^ btn_save;
+	private: System::Windows::Forms::Button^ button1;
 
 
 	private:
@@ -100,6 +101,7 @@ namespace ContactListLinkedList {
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->btn_clear = (gcnew System::Windows::Forms::Button());
 			this->btn_save = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -218,13 +220,16 @@ namespace ContactListLinkedList {
 			// 
 			this->tableLayoutPanel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->tableLayoutPanel1->ColumnCount = 2;
+			this->tableLayoutPanel1->ColumnCount = 3;
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
-			this->tableLayoutPanel1->Controls->Add(this->btn_clear, 0, 0);
-			this->tableLayoutPanel1->Controls->Add(this->btn_save, 1, 0);
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				121)));
+			this->tableLayoutPanel1->Controls->Add(this->button1, 0, 0);
+			this->tableLayoutPanel1->Controls->Add(this->btn_save, 2, 0);
+			this->tableLayoutPanel1->Controls->Add(this->btn_clear, 1, 0);
 			this->tableLayoutPanel1->Location = System::Drawing::Point(12, 325);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 1;
@@ -239,9 +244,9 @@ namespace ContactListLinkedList {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->btn_clear->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_clear->Location = System::Drawing::Point(3, 3);
+			this->btn_clear->Location = System::Drawing::Point(115, 3);
 			this->btn_clear->Name = L"btn_clear";
-			this->btn_clear->Size = System::Drawing::Size(166, 79);
+			this->btn_clear->Size = System::Drawing::Size(106, 79);
 			this->btn_clear->TabIndex = 0;
 			this->btn_clear->Text = L"Clear";
 			this->btn_clear->UseVisualStyleBackColor = true;
@@ -254,13 +259,28 @@ namespace ContactListLinkedList {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->btn_save->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_save->Location = System::Drawing::Point(175, 3);
+			this->btn_save->Location = System::Drawing::Point(227, 3);
 			this->btn_save->Name = L"btn_save";
-			this->btn_save->Size = System::Drawing::Size(167, 79);
+			this->btn_save->Size = System::Drawing::Size(115, 79);
 			this->btn_save->TabIndex = 1;
 			this->btn_save->Text = L"Save";
 			this->btn_save->UseVisualStyleBackColor = true;
 			this->btn_save->Click += gcnew System::EventHandler(this, &addForm::btn_save_Click);
+			// 
+			// button1
+			// 
+			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->Location = System::Drawing::Point(3, 3);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(106, 79);
+			this->button1->TabIndex = 2;
+			this->button1->Text = L"Cancel";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &addForm::button1_Click);
 			// 
 			// addForm
 			// 
@@ -350,6 +370,10 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 }
 private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	mainForm->Hide();
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	mainForm->Show();
 }
 };
 }
