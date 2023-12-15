@@ -237,9 +237,25 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	String^ phoneNumber = gcnew String(list.getContact(index).getPhone().c_str());
 	String^ email = gcnew String(list.getContact(index).getEmail().c_str());
 	String^ address = gcnew String(list.getContact(index).getAddress().c_str());
-
-	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address);
+	
+	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address, index);
 	form->ShowDialog();
+	ContactsListBox->Items->Clear();
+	LinkedList l2;
+	l2.read();
+	l2.sort();
+
+	// Create a ptr that points to the first node of the list.
+	LinkedList::NodePointer ptr = l2.first;
+	int i = 0;
+
+	
+	// Add first name and last name of each contact to the list box.
+	while (ptr != NULL) {
+		ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+		ptr = ptr->next;
+	}
+
 }	
 };
 }
