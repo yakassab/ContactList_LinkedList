@@ -3,6 +3,7 @@
 #include "Contact.h"
 #include "addForm.h"
 #include "DetailsForm.h"
+#include "SearchForm.h"
 namespace ContactListLinkedList {
 
 	using namespace System;
@@ -169,7 +170,7 @@ namespace ContactListLinkedList {
 		//list.erase(0);
 		//list.insert(Contact("youssef", "kassab", "01206437599", "ahmedd@gmail.com", "new York"),0);
 
-		//list.erase("Rdgdxgr", "Sefse");
+		//list.erase("", "");
 		//list.erase(1);
 		
 		// Sort the list.
@@ -200,6 +201,9 @@ namespace ContactListLinkedList {
 
 	}
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		SearchForm^ form = gcnew SearchForm();
+		form->ShowDialog();
+
 	}
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		//write code to move from one form to another
