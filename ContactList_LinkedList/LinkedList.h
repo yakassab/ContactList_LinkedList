@@ -38,16 +38,17 @@ public:
     void erase(string firstname, string lastname); // Remove a value from a list at a given index.
     NodePointer search(string firstname, string lastname) const; // Search for an data value in this list.
     void display(ostream& out) const; // Display the contents of this list.    
-     void read();
-     void write() const;
-     void swap(NodePointer a, NodePointer b);
-     void sort();
-     Contact getContact(int index);
-
-     friend istream& operator>>(istream& in, LinkedList& aList);
+    void read();
+    void write() const;
+    void swap(NodePointer a, NodePointer b);
+    void sort();
+    Contact getContact(int index);
+    Node* regexSearch(string text) const;
+    friend istream& operator>>(istream& in, LinkedList& aList);
 
 };
 ostream& operator<<(ostream& out, const LinkedList& aList);
+
 
 
 #endif /* LList */

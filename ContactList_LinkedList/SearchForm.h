@@ -1,4 +1,7 @@
 #pragma once
+#include "LinkedList.h"
+#include "Contact.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace ContactListLinkedList {
 
@@ -37,8 +40,10 @@ namespace ContactListLinkedList {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	protected:
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::ListBox^ listBox1;
+	private: System::Windows::Forms::Button^ searchButton;
+	private: System::Windows::Forms::ListBox^ searchLB;
+
+
 
 	private:
 		/// <summary>
@@ -55,8 +60,8 @@ namespace ContactListLinkedList {
 		{
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->searchButton = (gcnew System::Windows::Forms::Button());
+			this->searchLB = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -79,34 +84,35 @@ namespace ContactListLinkedList {
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Enter Name:";
 			// 
-			// button1
+			// searchButton
 			// 
-			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->searchButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
+			this->searchButton->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(328, 58);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(143, 46);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Search";
-			this->button1->UseVisualStyleBackColor = true;
+			this->searchButton->Location = System::Drawing::Point(328, 58);
+			this->searchButton->Name = L"searchButton";
+			this->searchButton->Size = System::Drawing::Size(143, 46);
+			this->searchButton->TabIndex = 2;
+			this->searchButton->Text = L"Search";
+			this->searchButton->UseVisualStyleBackColor = true;
+			this->searchButton->Click += gcnew System::EventHandler(this, &SearchForm::searchButton_Click);
 			// 
-			// listBox1
+			// searchLB
 			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->ItemHeight = 16;
-			this->listBox1->Location = System::Drawing::Point(12, 117);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(459, 308);
-			this->listBox1->TabIndex = 3;
+			this->searchLB->FormattingEnabled = true;
+			this->searchLB->ItemHeight = 16;
+			this->searchLB->Location = System::Drawing::Point(12, 117);
+			this->searchLB->Name = L"searchLB";
+			this->searchLB->Size = System::Drawing::Size(459, 308);
+			this->searchLB->TabIndex = 3;
 			// 
 			// SearchForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(483, 437);
-			this->Controls->Add(this->listBox1);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->searchLB);
+			this->Controls->Add(this->searchButton);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
 			this->Name = L"SearchForm";
@@ -116,5 +122,28 @@ namespace ContactListLinkedList {
 
 		}
 #pragma endregion
-	};
+	
+private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	searchLB->Items->Clear();
+	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
+	if (name == "") {
+		MessageBox::Show("Please enter a name to search for.");
+	}
+	else {
+
+		LinkedList list;
+		list.read();
+		LinkedList::Node* resListHead = list.regexSearch(name);
+		LinkedList::Node* ptr = resListHead;
+		int i = 0;
+
+		searchLB->Items->Clear();
+		// Add first name and last name of each contact to the list box.
+		while (ptr != NULL) {
+			searchLB->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+			ptr = ptr->next;
+		}
+	}
+}
+};
 }

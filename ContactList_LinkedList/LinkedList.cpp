@@ -3,6 +3,7 @@
 #include<fstream>
 #include <cstdlib>
 #include <stdlib.h>
+#include <regex>
 //-- Definition of the class constructor
 LinkedList::LinkedList() : first(0), mySize(0) {}
 
@@ -243,6 +244,36 @@ Contact LinkedList::getContact(int index)
 	}
 	return ptr->data;
 }
+
+LinkedList::Node* LinkedList::regexSearch(string text) const
+{
+
+    regex reg(".*" + text + ".*");
+
+
+    Node* ptr = first;
+    LinkedList* list = new LinkedList();
+    while (ptr != 0)
+    {
+        string s1 = ptr->data.getFirstName();
+        s1[0] = tolower(s1[0]);
+        string s2 = ptr->data.getLastName();
+        s2[0] = tolower(s2[0]);
+        string s = s1 + " " + s2;
+        if (regex_match(s, reg)){
+            list->insert(ptr->data, list->mySize);
+        }
+        ptr = ptr->next;
+    }
+    return list->first;
+}
+
+
+
+
+
+    
+
 
 //-- Definition of the output operator
 ostream& operator<<(ostream& out, const LinkedList& aList) {
