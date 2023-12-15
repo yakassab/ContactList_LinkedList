@@ -195,11 +195,7 @@ namespace ContactListLinkedList {
 
 
 	
-	private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-		//get the index of the selected item
-		int index = ContactsListBox->SelectedIndex;
-
-	}
+	
 	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		SearchForm^ form = gcnew SearchForm();
 		form->ShowDialog();
