@@ -175,9 +175,9 @@ namespace ContactListLinkedList {
 			// button1
 			// 
 			this->button1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->button1->Location = System::Drawing::Point(431, 59);
+			this->button1->Location = System::Drawing::Point(431, 56);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(66, 57);
+			this->button1->Size = System::Drawing::Size(66, 60);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"X";
 			this->button1->UseVisualStyleBackColor = true;
@@ -187,6 +187,8 @@ namespace ContactListLinkedList {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(26, 52);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			this->ClientSize = System::Drawing::Size(509, 696);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);

@@ -286,6 +286,8 @@ namespace ContactListLinkedList {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			this->ClientSize = System::Drawing::Size(369, 422);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Controls->Add(this->tb_email);
@@ -301,7 +303,7 @@ namespace ContactListLinkedList {
 			this->MaximumSize = System::Drawing::Size(527, 531);
 			this->MinimumSize = System::Drawing::Size(387, 469);
 			this->Name = L"addForm";
-			this->Text = L"addForm";
+			this->Text = L"Add Contact";
 			this->Load += gcnew System::EventHandler(this, &addForm::addForm_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->ResumeLayout(false);
