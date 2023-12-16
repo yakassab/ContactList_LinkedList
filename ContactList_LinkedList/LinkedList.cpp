@@ -245,14 +245,14 @@ Contact LinkedList::getContact(int index)
 	return ptr->data;
 }
 
-LinkedList::Node* LinkedList::regexSearch(string text) const
+LinkedList LinkedList::regexSearch(string text) const
 {
 
     regex reg(".*" + text + ".*");
 
 
     Node* ptr = first;
-    LinkedList* list = new LinkedList();
+    LinkedList list;
     while (ptr != 0)
     {
         string s1 = ptr->data.getFirstName();
@@ -261,18 +261,19 @@ LinkedList::Node* LinkedList::regexSearch(string text) const
         s2[0] = tolower(s2[0]);
         string s = s1 + " " + s2;
         if (regex_match(s, reg)){
-            list->insert(ptr->data, list->mySize);
+            list.sortedInsert(ptr->data);
         }
         ptr = ptr->next;
     }
-    return list->first;
+    return list;
 }
 
 
-
-
-
-    
+// Function to insert a new node then sort.
+void LinkedList::sortedInsert(ElementType data){
+    insert(data, 0);
+    sort();
+}
 
 
 //-- Definition of the output operator

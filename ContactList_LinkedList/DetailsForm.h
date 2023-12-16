@@ -17,6 +17,7 @@ namespace ContactListLinkedList {
 	public ref class DetailsForm : public System::Windows::Forms::Form
 	{
 	public:
+		String^ searchedName;
 		int index;
 		DetailsForm(void)
 		{
@@ -26,7 +27,7 @@ namespace ContactListLinkedList {
 			//
 		}
 
-		DetailsForm(String^ name, String^ phone, String^ email, String^ address, int i)
+		DetailsForm(String^ name, String^ phone, String^ email, String^ address, int i, String^ searched_name)
 		{
 			InitializeComponent();
 			label1->Text = name;
@@ -34,6 +35,7 @@ namespace ContactListLinkedList {
 			label3->Text = email;
 			label4->Text = address;
 			index = i;
+			searchedName = searched_name;
 		}
 
 		
@@ -316,7 +318,7 @@ private: System::Void deleteButton_Click(System::Object^ sender, System::EventAr
 
 if (MessageBox::Show("Are you sure you want to delete this contact?", "Delete Contact", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::No)
 	return;
-
+	
 	list.erase(index);
 	list.write();
 	

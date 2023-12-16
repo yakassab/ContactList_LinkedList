@@ -43,7 +43,8 @@ public:
     void swap(NodePointer a, NodePointer b);
     void sort();
     Contact getContact(int index);
-    Node* regexSearch(string text) const;
+    LinkedList regexSearch(string text) const;
+    void sortedInsert(ElementType data);
     friend istream& operator>>(istream& in, LinkedList& aList);
 
 };

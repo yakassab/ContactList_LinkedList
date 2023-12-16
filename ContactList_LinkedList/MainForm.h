@@ -19,6 +19,7 @@ namespace ContactListLinkedList {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
+		String^ searchedName;
 		MainForm(void)
 		{
 			InitializeComponent();
@@ -45,6 +46,9 @@ namespace ContactListLinkedList {
 	private: System::Windows::Forms::Button^ addButton;
 
 	private: System::Windows::Forms::ListBox^ ContactsListBox;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ button1;
 
 
 
@@ -74,6 +78,9 @@ namespace ContactListLinkedList {
 			this->searchButton = (gcnew System::Windows::Forms::Button());
 			this->addButton = (gcnew System::Windows::Forms::Button());
 			this->ContactsListBox = (gcnew System::Windows::Forms::ListBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -90,13 +97,13 @@ namespace ContactListLinkedList {
 			this->tableLayoutPanel1->Controls->Add(this->searchButton, 1, 1);
 			this->tableLayoutPanel1->Controls->Add(this->addButton, 0, 1);
 			this->tableLayoutPanel1->Controls->Add(this->ContactsListBox, 0, 0);
-			this->tableLayoutPanel1->Location = System::Drawing::Point(12, 12);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(12, 122);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 2;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 84)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(485, 460);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(485, 562);
 			this->tableLayoutPanel1->TabIndex = 1;
 			// 
 			// searchButton
@@ -105,7 +112,7 @@ namespace ContactListLinkedList {
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->searchButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->searchButton->Location = System::Drawing::Point(245, 379);
+			this->searchButton->Location = System::Drawing::Point(245, 481);
 			this->searchButton->Name = L"searchButton";
 			this->searchButton->Size = System::Drawing::Size(237, 78);
 			this->searchButton->TabIndex = 2;
@@ -119,7 +126,7 @@ namespace ContactListLinkedList {
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->addButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->addButton->Location = System::Drawing::Point(3, 379);
+			this->addButton->Location = System::Drawing::Point(3, 481);
 			this->addButton->Name = L"addButton";
 			this->addButton->Size = System::Drawing::Size(236, 78);
 			this->addButton->TabIndex = 3;
@@ -137,15 +144,53 @@ namespace ContactListLinkedList {
 			this->ContactsListBox->ItemHeight = 52;
 			this->ContactsListBox->Location = System::Drawing::Point(3, 3);
 			this->ContactsListBox->Name = L"ContactsListBox";
-			this->ContactsListBox->Size = System::Drawing::Size(479, 368);
+			this->ContactsListBox->Size = System::Drawing::Size(479, 472);
 			this->ContactsListBox->TabIndex = 4;
 			this->ContactsListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ContactsListBox_SelectedIndexChanged);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->textBox1->BackColor = System::Drawing::SystemColors::ScrollBar;
+			this->textBox1->Location = System::Drawing::Point(15, 59);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(410, 60);
+			this->textBox1->TabIndex = 2;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox1_TextChanged);
+			// 
+			// label1
+			// 
+			this->label1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->label1->AutoSize = true;
+			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->label1->Location = System::Drawing::Point(12, 4);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(413, 52);
+			this->label1->TabIndex = 3;
+			this->label1->Text = L"Search For Contact:";
+			// 
+			// button1
+			// 
+			this->button1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->button1->Location = System::Drawing::Point(431, 59);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(66, 57);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"X";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(26, 52);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(509, 484);
+			this->ClientSize = System::Drawing::Size(509, 696);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -157,6 +202,7 @@ namespace ContactListLinkedList {
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -238,7 +284,7 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	String^ email = gcnew String(list.getContact(index).getEmail().c_str());
 	String^ address = gcnew String(list.getContact(index).getAddress().c_str());
 	
-	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address, index);
+	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address, index, searchedName);
 	form->ShowDialog();
 	ContactsListBox->Items->Clear();
 	LinkedList l2;
@@ -257,5 +303,40 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	}
 
 }	
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	textBox1->Text = "";
+}
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	ContactsListBox->Items->Clear();
+	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
+	searchedName = textBox1->Text;
+	LinkedList list;
+	list.read();
+	if (name == "") {
+		// Displaying the full list.
+		LinkedList::Node* ptr = list.first;
+		int i = 0;
+
+		// Add first name and last name of each contact to the list box.
+		while (ptr != NULL) {
+			ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+			ptr = ptr->next;
+		}
+	}
+	else {
+
+		LinkedList regexList;
+		regexList = list.regexSearch(name);
+		LinkedList::Node* ptr = regexList.first;
+
+		int i = 0;
+
+		// Add first name and last name of each contact to the list box.
+		while (ptr != NULL) {
+			ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+			ptr = ptr->next;
+		}
+	}
+}
 };
 }

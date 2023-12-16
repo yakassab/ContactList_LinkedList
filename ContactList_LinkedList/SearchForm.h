@@ -118,53 +118,53 @@ namespace ContactListLinkedList {
 
 
 private: System::Void searchLB_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	int index = searchLB->SelectedIndex;
-	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
+	//int index = searchLB->SelectedIndex;
+	//string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
 
 
-	LinkedList l;
-	l.read();
-	LinkedList::Node* resListHead = l.regexSearch(name);
-	LinkedList list;
-	list.first = resListHead;
+	//LinkedList l;
+	//l.read();
+	//LinkedList::Node* resListHead = l.regexSearch(name);
+	//LinkedList list;
+	//list.first = resListHead;
 
 
-	String^ n = gcnew String((list.getContact(index).getFirstName() + " " + list.getContact(index).getLastName()).c_str());
-	String^ phoneNumber = gcnew String(list.getContact(index).getPhone().c_str());
-	String^ email = gcnew String(list.getContact(index).getEmail().c_str());
-	String^ address = gcnew String(list.getContact(index).getAddress().c_str());
+	//String^ n = gcnew String((list.getContact(index).getFirstName() + " " + list.getContact(index).getLastName()).c_str());
+	//String^ phoneNumber = gcnew String(list.getContact(index).getPhone().c_str());
+	//String^ email = gcnew String(list.getContact(index).getEmail().c_str());
+	//String^ address = gcnew String(list.getContact(index).getAddress().c_str());
 
-	DetailsForm^ form = gcnew DetailsForm(n, phoneNumber, email, address, index);
-	form->ShowDialog();
-	//searchLB->Items->Clear();
-	//textBox1->Text = "";
-	l.write();
+	//DetailsForm^ form = gcnew DetailsForm(n, phoneNumber, email, address, index);
+	//form->ShowDialog();
+	////searchLB->Items->Clear();
+	////textBox1->Text = "";
+	//l.write();
 
 
 	
 
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	searchLB->Items->Clear();
-	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
-	if (name == "") {
-		return;
-	}
-	else {
+	//searchLB->Items->Clear();
+	//string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
+	//if (name == "") {
+	//	return;
+	//}
+	//else {
 
-		LinkedList list;
-		list.read();
-		LinkedList::Node* resListHead = list.regexSearch(name);
-		//sList->first = resListHead;
-		LinkedList::Node* ptr = resListHead;
-		int i = 0;
+	//	LinkedList list;
+	//	list.read();
+	//	LinkedList::Node* resListHead = list.regexSearch(name);
+	//	//sList->first = resListHead;
+	//	LinkedList::Node* ptr = resListHead;
+	//	int i = 0;
 
-		// Add first name and last name of each contact to the list box.
-		while (ptr != NULL) {
-			searchLB->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
-			ptr = ptr->next;
-		}
-	}
+	//	// Add first name and last name of each contact to the list box.
+	//	while (ptr != NULL) {
+	//		searchLB->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+	//		ptr = ptr->next;
+	//	}
+	//}
 
 }
 };
