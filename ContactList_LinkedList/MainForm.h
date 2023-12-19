@@ -4,6 +4,7 @@
 #include "addForm.h"
 #include "DetailsForm.h"
 #include "SearchForm.h"
+#include <msclr\marshal_cppstd.h>
 namespace ContactListLinkedList {
 
 	using namespace System;
@@ -275,10 +276,13 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	//get the index of the selected item
 	int index = ContactsListBox->SelectedIndex;
 
-	LinkedList list;
+	LinkedList list1;
 
-	list.read();
-	list.sort();
+	list1.read();
+	LinkedList list;
+	string n = msclr::interop::marshal_as<std::string>(textBox1->Text);
+	list = list1.regexSearch(n);
+	
 
 	
     String^ name = gcnew String((list.getContact(index).getFirstName() + " " + list.getContact(index).getLastName()).c_str());
@@ -286,15 +290,13 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	String^ email = gcnew String(list.getContact(index).getEmail().c_str());
 	String^ address = gcnew String(list.getContact(index).getAddress().c_str());
 	
-	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address, index, searchedName);
+	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address, index, textBox1->Text);
 	form->ShowDialog();
 	ContactsListBox->Items->Clear();
-	LinkedList l2;
-	l2.read();
-	l2.sort();
+	
 
 	// Create a ptr that points to the first node of the list.
-	LinkedList::NodePointer ptr = l2.first;
+	LinkedList::NodePointer ptr = list.first;
 	int i = 0;
 
 	

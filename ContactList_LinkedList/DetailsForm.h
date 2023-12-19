@@ -1,6 +1,6 @@
 #pragma once
 #include "LinkedList.h"
-
+#include <msclr\marshal_cppstd.h>
 
 namespace ContactListLinkedList {
 
@@ -321,7 +321,12 @@ private: System::Void deleteButton_Click(System::Object^ sender, System::EventAr
 if (MessageBox::Show("Are you sure you want to delete this contact?", "Delete Contact", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::No)
 	return;
 	
-	list.erase(index);
+	string name = msclr::interop::marshal_as<std::string>(label1->Text);
+	// split name into first and last name
+	string first_name = name.substr(0, name.find(" "));
+	string last_name = name.substr(name.find(" ") + 1, name.length());
+	list.erase(first_name, last_name);
+
 	list.write();
 	
 
