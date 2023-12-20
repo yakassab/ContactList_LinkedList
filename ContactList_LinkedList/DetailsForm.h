@@ -322,7 +322,7 @@ if (MessageBox::Show("Are you sure you want to delete this contact?", "Delete Co
 	return;
 	
 	string name = msclr::interop::marshal_as<std::string>(label1->Text);
-	// split name into first and last name
+	
 	string first_name = name.substr(0, name.find(" "));
 	string last_name = name.substr(name.find(" ") + 1, name.length());
 	list.erase(first_name, last_name);

@@ -271,6 +271,30 @@ namespace ContactListLinkedList {
 			ptr = ptr->next;
 		}
 	}
+
+// write a function to update listbox after deleting a contact.
+
+	private: System::Void update_LB() {
+		LinkedList list1, list;
+		list1.read();
+		string n = msclr::interop::marshal_as<std::string>(textBox1->Text);
+		list = list1.regexSearch(n);
+		// Sort the list.
+		
+
+		// Create a ptr that points to the first node of the list.
+		LinkedList::NodePointer ptr = list.first;
+		int i = 0;
+
+		ContactsListBox->Items->Clear();
+		// Add first name and last name of each contact to the list box.
+		while (ptr != NULL) {
+			ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
+			ptr = ptr->next;
+		}
+	}
+
+
 private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	
 	//get the index of the selected item
@@ -292,19 +316,8 @@ private: System::Void ContactsListBox_SelectedIndexChanged(System::Object^ sende
 	
 	DetailsForm^ form = gcnew DetailsForm(name, phoneNumber, email, address, index, textBox1->Text);
 	form->ShowDialog();
-	ContactsListBox->Items->Clear();
+	update_LB();
 	
-
-	// Create a ptr that points to the first node of the list.
-	LinkedList::NodePointer ptr = list.first;
-	int i = 0;
-
-	
-	// Add first name and last name of each contact to the list box.
-	while (ptr != NULL) {
-		ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
-		ptr = ptr->next;
-	}
 
 }	
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
