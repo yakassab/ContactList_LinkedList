@@ -2,6 +2,7 @@
 #include "Contact.h"
 #include "LinkedList.h"
 #include <msclr\marshal_cppstd.h>
+#include "checks.h"
 namespace ContactListLinkedList {
 
 	using namespace System;
@@ -391,7 +392,7 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 		this->tb_City->Text = "";
 	}
 	else if (mode == "edit") {
-		// split address into building no, street and city using substring.
+		
 		String^ address = msclr::interop::marshal_as<String^>(searchedNode->data.getAddress()); 
 		String^ buildNo;
 		String^ street;
@@ -412,7 +413,12 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 			i++;
 		}
 
-
+		if (street[0] == ' ') {
+			street = street->Remove(0, 1);
+		}
+		if (city[0] == ' ') {
+			city = city->Remove(0, 1);
+		}
 
 
 		this->tb_firstname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getFirstName());
@@ -437,35 +443,45 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 
 		LinkedList list;
 		list.read();
-		Contact c;
+		
 		if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_buildNo->Text == "" || tb_City->Text == "")
 		{
 			MessageBox::Show("Please fill out all fields");
 			return;
 		}
-		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
+		else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
 		{
 			MessageBox::Show("Please enter a valid first name");
 			return;
 		}
-		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
+		else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
 		{
 			MessageBox::Show("Please enter a valid last name");
 			return;
 		}
-		else if (!c.isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
+		else if (!isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
 		{
 			MessageBox::Show("Please enter a valid phone number");
 			return;
 		}
-		else if (!c.isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
+		else if (!isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
 		{
 			MessageBox::Show("Please enter a valid email");
 			return;
 		}
-		else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(address)))
+		else if (!isValidBuildNo(msclr::interop::marshal_as<std::string>(tb_buildNo->Text)))
 		{
-			MessageBox::Show("Please enter a valid address");
+			MessageBox::Show("Please enter a valid building number");
+			return;
+		}
+		else if (!isValidStreet(msclr::interop::marshal_as<std::string>(tb_street->Text)))
+		{
+			MessageBox::Show("Please enter a valid street");
+			return;
+		}
+		else if (!isValidCity(msclr::interop::marshal_as<std::string>(tb_City->Text)))
+		{
+			MessageBox::Show("Please enter a valid city");
 			return;
 		}
 		else {
@@ -493,29 +509,39 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 			MessageBox::Show("Please fill out all fields");
 			return;
 		}
-		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
+		else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
 		{
 			MessageBox::Show("Please enter a valid first name");
 			return;
 		}
-		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
+		else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
 		{
 			MessageBox::Show("Please enter a valid last name");
 			return;
 		}
-		else if (!c.isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
+		else if (!isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
 		{
 			MessageBox::Show("Please enter a valid phone number");
 			return;
 		}
-		else if (!c.isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
+		else if (!isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
 		{
 			MessageBox::Show("Please enter a valid email");
 			return;
 		}
-		else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(address)))
+		else if (!isValidBuildNo(msclr::interop::marshal_as<std::string>(tb_buildNo->Text)))
 		{
-			MessageBox::Show("Please enter a valid address");
+			MessageBox::Show("Please enter a valid building number");
+			return;
+		}
+		else if (!isValidStreet(msclr::interop::marshal_as<std::string>(tb_street->Text)))
+		{
+			MessageBox::Show("Please enter a valid street");
+			return;
+		}
+		else if (!isValidCity(msclr::interop::marshal_as<std::string>(tb_City->Text)))
+		{
+			MessageBox::Show("Please enter a valid city");
 			return;
 		}
 		else {
@@ -534,13 +560,14 @@ private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e)
 		mainForm->Hide();
 	}
 	else if (mode == "edit") {
-		this->btn_clear->Text = "reset";
+		this->btn_clear->Text = "Reset";
 		this->Text = "Edit Contact";
-		String^ address = msclr::interop::marshal_as<String^>(searchedNode->data.getAddress()); \
-			String^ buildNo;
+		String^ address = msclr::interop::marshal_as<String^>(searchedNode->data.getAddress()); 
+		String^ buildNo;
 		String^ street;
 		String^ city;
 		int i = 0;
+
 		while (address[i] != ',') {
 			buildNo += address[i];
 			i++;
@@ -556,8 +583,12 @@ private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e)
 			i++;
 		}
 
-
-
+		if (street[0] == ' ') {
+			street = street->Remove(0, 1);
+		}
+		if (city[0] == ' ') {
+			city = city->Remove(0, 1);
+		}
 
 		this->tb_firstname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getFirstName());
 		this->tb_lastname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getLastName());

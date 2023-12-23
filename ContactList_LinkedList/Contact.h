@@ -32,10 +32,10 @@ public:
 	void setAddress(string address);
 
 	//----------------Checks----------------//
-	bool isValidName(string name);
+	/*bool isValidName(string name);
 	bool isValidPhone(string phoneNumber);
 	bool isValidEmail(string email);
-	bool isValidAddress(string address);
+	bool isValidAddress(string address);*/
 
 	friend bool operator==(const Contact& lhs, const Contact& rhs);
 	friend ostream& operator<<(ostream& out, const Contact& contact);

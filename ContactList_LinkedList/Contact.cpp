@@ -68,52 +68,54 @@ void Contact::setAddress(string address)
 {
 	this->address = address;
 }
+//
+//bool Contact::isValidName(string name) {
+//	// Check if the name is empty.
+//	if (name.empty()) {
+//		return false;
+//	}
+//	// Check if the first character is a letter.
+//	if (!isalpha(name[0])) {
+//		return false;
+//	}
+//	return true;
+//}
+//
+//bool Contact::isValidPhone(string phoneNumber)
+//{
+//	// Check if the phone number is 11 characters long.
+//	if (phoneNumber.size() != 11) {
+//		return false;
+//	}
+//
+//	// Check if the phone number starts with 01.
+//	if (phoneNumber.substr(0, 2) != "01") {
+//		return false;
+//	}
+//
+//	// Check if the remaining characters are digits.
+//	for (int i = 2; i < phoneNumber.size(); ++i) {
+//		if (!isdigit(phoneNumber[i])) {
+//			return false;
+//		}
+//	}
+//	return true;
+//}
+//
+//bool Contact::isValidEmail(string email)
+//{
+//	regex emailRegex("[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*");
+//
+//	// Match the email address against the regular expression.
+//	return regex_match(email, emailRegex);
+//}
+//
+//bool Contact::isValidAddress(string address)
+//{
+//	return !address.empty();
+//}
 
-bool Contact::isValidName(string name) {
-	// Check if the name is empty.
-	if (name.empty()) {
-		return false;
-	}
-	// Check if the first character is a letter.
-	if (!isalpha(name[0])) {
-		return false;
-	}
-	return true;
-}
 
-bool Contact::isValidPhone(string phoneNumber)
-{
-	// Check if the phone number is 11 characters long.
-	if (phoneNumber.size() != 11) {
-		return false;
-	}
-
-	// Check if the phone number starts with 01.
-	if (phoneNumber.substr(0, 2) != "01") {
-		return false;
-	}
-
-	// Check if the remaining characters are digits.
-	for (int i = 2; i < phoneNumber.size(); ++i) {
-		if (!isdigit(phoneNumber[i])) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool Contact::isValidEmail(string email)
-{
-	regex emailRegex("[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*");
-
-	// Match the email address against the regular expression.
-	return regex_match(email, emailRegex);
-}
-
-bool Contact::isValidAddress(string address)
-{
-	return !address.empty();
-}
 //operator = overload
 const Contact& Contact::operator=(const Contact& rightSide)
 {

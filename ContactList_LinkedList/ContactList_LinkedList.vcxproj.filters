@@ -36,6 +36,9 @@
     <ClCompile Include="SearchForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="checks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SearchForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="checks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
