@@ -1,7 +1,6 @@
 #pragma once
 #include "Contact.h"
 #include "LinkedList.h"
-//#include "MainForm.h"
 #include <msclr\marshal_cppstd.h>
 namespace ContactListLinkedList {
 
@@ -19,6 +18,8 @@ namespace ContactListLinkedList {
 	{
 	public:
 		Form^ mainForm;
+		LinkedList::NodePointer searchedNode;
+		String^ mode;
 		addForm(void)
 		{
 			InitializeComponent();
@@ -26,15 +27,23 @@ namespace ContactListLinkedList {
 			//TODO: Add the constructor code here
 			//
 		}
-		addForm(Form^ f)
+		addForm(Form^ f, String^ m)
 		{
 			mainForm = f;
+			mode = m;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 		}
-
+		addForm(Form^ f, LinkedList::NodePointer node, String^ m)
+		{
+			mainForm = f;
+			searchedNode = node;
+			mode = m;
+			InitializeComponent();
+			//
+		}
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -372,71 +381,193 @@ namespace ContactListLinkedList {
 #pragma endregion
 	
 private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->tb_firstname->Text = "";
-	this->tb_lastname->Text = "";
-	this->tb_phoneNumber->Text = "";
-	this->tb_email->Text = "";
-	this->tb_buildNo->Text = "";
-	this->tb_street->Text = "";
-	this->tb_City->Text = "";
+	if (mode == "add") {
+		this->tb_firstname->Text = "";
+		this->tb_lastname->Text = "";
+		this->tb_phoneNumber->Text = "";
+		this->tb_email->Text = "";
+		this->tb_buildNo->Text = "";
+		this->tb_street->Text = "";
+		this->tb_City->Text = "";
+	}
+	else if (mode == "edit") {
+		// split address into building no, street and city using substring.
+		String^ address = msclr::interop::marshal_as<String^>(searchedNode->data.getAddress()); 
+		String^ buildNo;
+		String^ street;
+		String^ city;
+		int i = 0;
+		while (address[i] != ',') {
+			buildNo += address[i];
+			i++;
+		}
+		i++;
+		while (address[i] != ',') {
+			street += address[i];
+			i++;
+		}
+		i++;
+		while (i < address->Length) {
+			city += address[i];
+			i++;
+		}
+
+
+
+
+		this->tb_firstname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getFirstName());
+		this->tb_lastname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getLastName());
+		this->tb_phoneNumber->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getPhone());
+		this->tb_email->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getEmail());
+		this->tb_buildNo->Text = buildNo;
+		this->tb_street->Text = street;
+		this->tb_City->Text = city;
+	}
 }
 private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (mode == "add") {
 
-	//concat address
-	String^ address = tb_buildNo->Text + " " + tb_street->Text + " " + tb_City->Text;
-	// check if pnohne number starts with +2 then remove it
-	if (tb_phoneNumber->Text->StartsWith("+2"))
-	{
-		tb_phoneNumber->Text = tb_phoneNumber->Text->Remove(0, 2);
-	}
+		//concat address
+		String^ address = tb_buildNo->Text + ", " + tb_street->Text + ", " + tb_City->Text;
+		// check if phone number starts with +2 then remove it
+		if (tb_phoneNumber->Text->StartsWith("+2"))
+		{
+			tb_phoneNumber->Text = tb_phoneNumber->Text->Remove(0, 2);
+		}
 
-	LinkedList list;
-	list.read();
-	Contact c;
-	if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_buildNo->Text == "" || tb_City->Text == "")
-	{
-		MessageBox::Show("Please fill out all fields");
-		return;
-	}
-	else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
-	{
-		MessageBox::Show("Please enter a valid first name");
-		return;
-	}
-	else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
-	{
-		MessageBox::Show("Please enter a valid last name");
-		return;
-	}
-	else if (!c.isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
-	{
-		MessageBox::Show("Please enter a valid phone number");
-		return;
-	}
-	else if (!c.isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
-	{
-		MessageBox::Show("Please enter a valid email");
-		return;
-	}
-	else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(address)))
-	{
-		MessageBox::Show("Please enter a valid address");
-		return;
-	}
-	else{
-		list.sortedInsert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(address)));
-	}
-	list.sort();
-	list.write();
+		LinkedList list;
+		list.read();
+		Contact c;
+		if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_buildNo->Text == "" || tb_City->Text == "")
+		{
+			MessageBox::Show("Please fill out all fields");
+			return;
+		}
+		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
+		{
+			MessageBox::Show("Please enter a valid first name");
+			return;
+		}
+		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
+		{
+			MessageBox::Show("Please enter a valid last name");
+			return;
+		}
+		else if (!c.isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
+		{
+			MessageBox::Show("Please enter a valid phone number");
+			return;
+		}
+		else if (!c.isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
+		{
+			MessageBox::Show("Please enter a valid email");
+			return;
+		}
+		else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(address)))
+		{
+			MessageBox::Show("Please enter a valid address");
+			return;
+		}
+		else {
+			list.sortedInsert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(address)));
+		}
+		list.sort();
+		list.write();
 
 
-	this->Hide();
-    mainForm->Show();
+		
+	} else if(mode == "edit") {
+		//concat address
+		String^ address = tb_buildNo->Text + ", " + tb_street->Text + ", " + tb_City->Text;
+		// check if phone number starts with +2 then remove it
+		if (tb_phoneNumber->Text->StartsWith("+2"))
+		{
+			tb_phoneNumber->Text = tb_phoneNumber->Text->Remove(0, 2);
+		}
 
+		LinkedList list;
+		list.read();
+		Contact c;
+		if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_buildNo->Text == "" || tb_City->Text == "")
+		{
+			MessageBox::Show("Please fill out all fields");
+			return;
+		}
+		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
+		{
+			MessageBox::Show("Please enter a valid first name");
+			return;
+		}
+		else if (!c.isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
+		{
+			MessageBox::Show("Please enter a valid last name");
+			return;
+		}
+		else if (!c.isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
+		{
+			MessageBox::Show("Please enter a valid phone number");
+			return;
+		}
+		else if (!c.isValidEmail(msclr::interop::marshal_as<std::string>(tb_email->Text)))
+		{
+			MessageBox::Show("Please enter a valid email");
+			return;
+		}
+		else if (!c.isValidAddress(msclr::interop::marshal_as<std::string>(address)))
+		{
+			MessageBox::Show("Please enter a valid address");
+			return;
+		}
+		else {
+			list.erase(searchedNode->data);
+			list.sortedInsert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(address)));
+		}
+		
+		list.write();
 	
+	}
+	this->Hide();
+	mainForm->Show();
 }
 private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	mainForm->Hide();
+	if (mode == "add") {
+		mainForm->Hide();
+	}
+	else if (mode == "edit") {
+		this->btn_clear->Text = "reset";
+		this->Text = "Edit Contact";
+		String^ address = msclr::interop::marshal_as<String^>(searchedNode->data.getAddress()); \
+			String^ buildNo;
+		String^ street;
+		String^ city;
+		int i = 0;
+		while (address[i] != ',') {
+			buildNo += address[i];
+			i++;
+		}
+		i++;
+		while (address[i] != ',') {
+			street += address[i];
+			i++;
+		}
+		i++;
+		while (i < address->Length) {
+			city += address[i];
+			i++;
+		}
+
+
+
+
+		this->tb_firstname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getFirstName());
+		this->tb_lastname->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getLastName());
+		this->tb_phoneNumber->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getPhone());
+		this->tb_email->Text = msclr::interop::marshal_as<String^>(searchedNode->data.getEmail());
+		this->tb_buildNo->Text = buildNo;
+		this->tb_street->Text = street;
+		this->tb_City->Text = city;
+	}
+	
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();

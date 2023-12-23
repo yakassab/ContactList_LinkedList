@@ -252,7 +252,7 @@ namespace ContactListLinkedList {
 	}
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		//write code to move from one form to another
-		addForm^ form = gcnew addForm(this);
+		addForm^ form = gcnew addForm(this, "add");
 		form->ShowDialog();
 		LinkedList list;
 		list.read();

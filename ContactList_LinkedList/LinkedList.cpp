@@ -129,6 +129,19 @@ LinkedList::NodePointer LinkedList::search(string firstname, string lastname) co
 	return 0;   // not found
 }
 
+//Contact LinkedList::search(Contact c) const
+//{
+//Node* ptr = first;
+//while (ptr != 0)
+//{
+//    if (c == ptr->data) {
+//        return ptr->data;
+//    }
+//    ptr = ptr->next;
+//}
+//return Cont;   // not found
+//}
+
 // Erase a contact by first name and last name.
 void LinkedList::erase(string firstname, string lastname)
 {
@@ -155,6 +168,28 @@ void LinkedList::erase(string firstname, string lastname)
 		
    
 
+}
+
+void LinkedList::erase(Contact c)
+{
+NodePointer ptr = first;
+	NodePointer ptr2 = first;
+	int counter = 0;
+	if (ptr == 0) {
+		return;
+	}
+	else {
+		while (ptr2 != 0) {
+			if (ptr2->data == c) {
+				erase(counter);
+				break;
+			}
+			else {
+				counter++;
+			}
+			ptr2 = ptr2->next;
+		}
+	}
 }
 
 

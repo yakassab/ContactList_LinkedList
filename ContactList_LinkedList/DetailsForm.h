@@ -1,5 +1,7 @@
 #pragma once
 #include "LinkedList.h"
+#include "addForm.h"
+
 #include <msclr\marshal_cppstd.h>
 
 namespace ContactListLinkedList {
@@ -204,6 +206,7 @@ namespace ContactListLinkedList {
 			this->editButton->TabIndex = 0;
 			this->editButton->Text = L"Edit";
 			this->editButton->UseVisualStyleBackColor = true;
+			this->editButton->Click += gcnew System::EventHandler(this, &DetailsForm::editButton_Click);
 			// 
 			// tableLayoutPanel2
 			// 
@@ -336,6 +339,23 @@ if (MessageBox::Show("Are you sure you want to delete this contact?", "Delete Co
 
 
 this->Close();
+}
+private: System::Void editButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	LinkedList list;
+	list.read();
+	list.sort();
+
+	string name = msclr::interop::marshal_as<std::string>(label1->Text);
+	string first_name = name.substr(0, name.find(" "));
+	string last_name = name.substr(name.find(" ") + 1, name.length());
+
+	LinkedList::NodePointer n = list.search(first_name, last_name);
+	// set mode to edit.
+	
+	
+	addForm^ form = gcnew addForm(this, n, "edit");
+	form->ShowDialog();
+	this->Close();
 }
 };
 }
