@@ -430,35 +430,48 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 		this->tb_City->Text = city;
 	}
 }
-private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (mode == "add") {
+	private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (mode == "add") {
+			string name = msclr::interop::marshal_as<std::string>(tb_firstname->Text) + " " + msclr::interop::marshal_as<std::string>(tb_lastname->Text);
+			// make first letter of first name and last name capital.
+			name[0] = toupper(name[0]);
+			int i = 0;
+			while (name[i] != ' ') {i++;}
+			i++;
+			name[i] = toupper(name[i]);
 
-		//concat address
-		String^ address = tb_buildNo->Text + ", " + tb_street->Text + ", " + tb_City->Text;
-		// check if phone number starts with +2 then remove it
-		if (tb_phoneNumber->Text->StartsWith("+2"))
-		{
-			tb_phoneNumber->Text = tb_phoneNumber->Text->Remove(0, 2);
-		}
+			//concat address
+			String^ address = tb_buildNo->Text + ", " + tb_street->Text + ", " + tb_City->Text;
+			// check if phone number starts with +2 then remove it
+			if (tb_phoneNumber->Text->StartsWith("+2"))
+			{
+				tb_phoneNumber->Text = tb_phoneNumber->Text->Remove(0, 2);
+			}
 
-		LinkedList list;
-		list.read();
-		
-		if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_buildNo->Text == "" || tb_City->Text == "")
-		{
-			MessageBox::Show("Please fill out all fields");
+			LinkedList list;
+			list.read();
+
+			if (tb_firstname->Text == "" || tb_lastname->Text == "" || tb_phoneNumber->Text == "" || tb_email->Text == "" || tb_buildNo->Text == "" || tb_City->Text == "")
+			{
+				MessageBox::Show("Please fill out all fields");
+				return;
+			}
+			else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
+			{
+				MessageBox::Show("Please enter a valid first name");
+				return;
+			}
+			else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
+			{
+				MessageBox::Show("Please enter a valid last name");
+				return;
+			}
+			else if (list.contactExists(name))
+			{
+				MessageBox::Show("Contact with name: " + gcnew String(name.c_str()) + " already exists");
 			return;
-		}
-		else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_firstname->Text)))
-		{
-			MessageBox::Show("Please enter a valid first name");
-			return;
-		}
-		else if (!isValidName(msclr::interop::marshal_as<std::string>(tb_lastname->Text)))
-		{
-			MessageBox::Show("Please enter a valid last name");
-			return;
-		}
+
+			}
 		else if (!isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
 		{
 			MessageBox::Show("Please enter a valid phone number");
@@ -490,7 +503,7 @@ private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ 
 		list.sort();
 		list.write();
 
-
+	
 		
 	} else if(mode == "edit") {
 		//concat address

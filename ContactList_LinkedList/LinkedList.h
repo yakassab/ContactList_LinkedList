@@ -45,6 +45,7 @@ public:
     void swap(NodePointer a, NodePointer b);
     void sort();
     Contact getContact(int index);
+    bool contactExists(string name);
     LinkedList regexSearch(string text) const;
     void sortedInsert(ElementType data);
     friend istream& operator>>(istream& in, LinkedList& aList);

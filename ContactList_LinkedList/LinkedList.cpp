@@ -280,6 +280,21 @@ Contact LinkedList::getContact(int index)
 	return ptr->data;
 }
 
+bool LinkedList::contactExists(string name)
+{
+NodePointer ptr = first;
+	while (ptr != 0)
+	{
+		if ((ptr->data.getFirstName() + " " + ptr->data.getLastName()) == name)
+		{
+			return true;
+		}
+		ptr = ptr->next;
+	}
+	return false;
+    
+}
+
 LinkedList LinkedList::regexSearch(string text) const
 {
 
