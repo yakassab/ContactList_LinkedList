@@ -20,6 +20,9 @@ namespace ContactListLinkedList {
 	public:
 		Form^ mainForm;
 		LinkedList::NodePointer searchedNode;
+	private: System::Windows::Forms::Label^ counterLabel;
+
+	public:
 		String^ mode;
 		addForm(void)
 		{
@@ -124,6 +127,7 @@ namespace ContactListLinkedList {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tb_City = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->counterLabel = (gcnew System::Windows::Forms::Label());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -134,9 +138,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->lbl_firstname->Location = System::Drawing::Point(12, 9);
 			this->lbl_firstname->Name = L"lbl_firstname";
-			this->lbl_firstname->Size = System::Drawing::Size(106, 25);
+			this->lbl_firstname->Size = System::Drawing::Size(112, 25);
 			this->lbl_firstname->TabIndex = 0;
-			this->lbl_firstname->Text = L"First Name";
+			this->lbl_firstname->Text = L"First Name:";
 			// 
 			// lbl_lastname
 			// 
@@ -145,9 +149,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->lbl_lastname->Location = System::Drawing::Point(12, 70);
 			this->lbl_lastname->Name = L"lbl_lastname";
-			this->lbl_lastname->Size = System::Drawing::Size(106, 25);
+			this->lbl_lastname->Size = System::Drawing::Size(112, 25);
 			this->lbl_lastname->TabIndex = 1;
-			this->lbl_lastname->Text = L"Last Name";
+			this->lbl_lastname->Text = L"Last Name:";
 			// 
 			// lbl_phoneNumber
 			// 
@@ -156,9 +160,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->lbl_phoneNumber->Location = System::Drawing::Point(12, 131);
 			this->lbl_phoneNumber->Name = L"lbl_phoneNumber";
-			this->lbl_phoneNumber->Size = System::Drawing::Size(143, 25);
+			this->lbl_phoneNumber->Size = System::Drawing::Size(149, 25);
 			this->lbl_phoneNumber->TabIndex = 2;
-			this->lbl_phoneNumber->Text = L"Phone Number";
+			this->lbl_phoneNumber->Text = L"Phone Number:";
 			// 
 			// lbl_email
 			// 
@@ -167,9 +171,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->lbl_email->Location = System::Drawing::Point(14, 192);
 			this->lbl_email->Name = L"lbl_email";
-			this->lbl_email->Size = System::Drawing::Size(60, 25);
+			this->lbl_email->Size = System::Drawing::Size(66, 25);
 			this->lbl_email->TabIndex = 3;
-			this->lbl_email->Text = L"Email";
+			this->lbl_email->Text = L"Email:";
 			// 
 			// labelbuildNo
 			// 
@@ -203,6 +207,7 @@ namespace ContactListLinkedList {
 			this->tb_phoneNumber->Name = L"tb_phoneNumber";
 			this->tb_phoneNumber->Size = System::Drawing::Size(375, 30);
 			this->tb_phoneNumber->TabIndex = 6;
+			this->tb_phoneNumber->TextChanged += gcnew System::EventHandler(this, &addForm::tb_phoneNumber_TextChanged);
 			// 
 			// tb_firstname
 			// 
@@ -321,9 +326,9 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(10, 314);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(64, 25);
+			this->label1->Size = System::Drawing::Size(70, 25);
 			this->label1->TabIndex = 11;
-			this->label1->Text = L"Street";
+			this->label1->Text = L"Street:";
 			// 
 			// tb_City
 			// 
@@ -343,9 +348,17 @@ namespace ContactListLinkedList {
 				static_cast<System::Byte>(0)));
 			this->label2->Location = System::Drawing::Point(12, 377);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(46, 25);
+			this->label2->Size = System::Drawing::Size(52, 25);
 			this->label2->TabIndex = 13;
-			this->label2->Text = L"City";
+			this->label2->Text = L"City:";
+			// 
+			// counterLabel
+			// 
+			this->counterLabel->AutoSize = true;
+			this->counterLabel->Location = System::Drawing::Point(358, 169);
+			this->counterLabel->Name = L"counterLabel";
+			this->counterLabel->Size = System::Drawing::Size(0, 16);
+			this->counterLabel->TabIndex = 16;
 			// 
 			// addForm
 			// 
@@ -354,6 +367,7 @@ namespace ContactListLinkedList {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			this->ClientSize = System::Drawing::Size(399, 537);
+			this->Controls->Add(this->counterLabel);
 			this->Controls->Add(this->tb_City);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->tb_street);
@@ -390,6 +404,7 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 		this->tb_buildNo->Text = "";
 		this->tb_street->Text = "";
 		this->tb_City->Text = "";
+		
 	}
 	else if (mode == "edit") {
 		
@@ -439,6 +454,13 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 			while (name[i] != ' ') {i++;}
 			i++;
 			name[i] = toupper(name[i]);
+
+			tb_street->Text = tb_street->Text->Trim();
+			
+			
+				
+
+			tb_City->Text = tb_City->Text->Trim();
 
 			//concat address
 			String^ address = tb_buildNo->Text + ", " + tb_street->Text + ", " + tb_City->Text;
@@ -512,6 +534,13 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 	
 		
 	} else if(mode == "edit") {
+
+		tb_street->Text = tb_street->Text->Trim();
+
+
+
+
+		tb_City->Text = tb_City->Text->Trim();
 		//concat address
 		String^ address = tb_buildNo->Text + ", " + tb_street->Text + ", " + tb_City->Text;
 		// check if phone number starts with +2 then remove it
@@ -576,7 +605,7 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 }
 private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	if (mode == "add") {
-		mainForm->Hide();
+		//mainForm->Hide();
 	}
 	else if (mode == "edit") {
 		this->btn_clear->Text = "Reset";
@@ -622,6 +651,14 @@ private: System::Void addForm_Load(System::Object^ sender, System::EventArgs^ e)
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 	mainForm->Show();
+}
+private: System::Void tb_phoneNumber_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (tb_phoneNumber->Text->Length == 0){
+		counterLabel->Text = "0";
+	}
+	// code to make label show how many chars are written.
+	counterLabel->Text = tb_phoneNumber->Text->Length.ToString();
+
 }
 };
 }

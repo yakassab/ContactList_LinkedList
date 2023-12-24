@@ -32,6 +32,11 @@ bool isValidPhone(string phoneNumber)
 		return false;
 	}
 
+	// phone number must start with 01.
+	if (phoneNumber[0] != '0' || phoneNumber[1] != '1') {
+		return false;
+	}
+
 	// phone number cant contain any letters or special characters.
 	for (int i = 0; i < phoneNumber.length(); i++) {
 		if (!isdigit(phoneNumber[i])) {
@@ -44,12 +49,8 @@ bool isValidPhone(string phoneNumber)
 
 bool isValidEmail(string email)
 {
-	
 	regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
 	return regex_match(email, pattern);
-
-
-	return true;
 }
 
 // write the function that checks if the building number is correct.
