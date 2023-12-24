@@ -295,6 +295,22 @@ NodePointer ptr = first;
     
 }
 
+bool LinkedList::phoneExists(string phone)
+{
+    
+    NodePointer ptr = first;
+	while (ptr != 0)
+	{
+		if (ptr->data.getPhone() == phone)
+		{
+			return true;
+		}
+		ptr = ptr->next;
+	}
+	return false;
+
+}
+
 LinkedList LinkedList::regexSearch(string text) const
 {
 

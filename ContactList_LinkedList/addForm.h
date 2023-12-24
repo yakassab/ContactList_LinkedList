@@ -468,8 +468,14 @@ private: System::Void btn_clear_Click(System::Object^ sender, System::EventArgs^
 			}
 			else if (list.contactExists(name))
 			{
-				MessageBox::Show("Contact with name: " + gcnew String(name.c_str()) + " already exists");
-			return;
+				MessageBox::Show("Contact with Name: " + gcnew String(name.c_str()) + " already exists");
+				return;
+
+			}
+			else if (list.phoneExists(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))
+			{
+				MessageBox::Show("Contact with Phone Number: " + tb_phoneNumber->Text + " already exists");
+				return;
 
 			}
 		else if (!isValidPhone(msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text)))

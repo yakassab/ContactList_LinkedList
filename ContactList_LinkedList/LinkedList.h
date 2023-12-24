@@ -38,7 +38,6 @@ public:
     void erase(string firstname, string lastname); // Remove a value from a list at a given index.
     void erase(Contact c); // Remove a value from a list at a given index.
     NodePointer search(string firstname, string lastname) const; // Search for an data value in this list.
-    Contact search(Contact c) const; // Search for an data value in this list.
     void display(ostream& out) const; // Display the contents of this list.    
     void read();
     void write() const;
@@ -46,6 +45,7 @@ public:
     void sort();
     Contact getContact(int index);
     bool contactExists(string name);
+    bool phoneExists(string phone);
     LinkedList regexSearch(string text) const;
     void sortedInsert(ElementType data);
     friend istream& operator>>(istream& in, LinkedList& aList);
