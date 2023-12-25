@@ -334,6 +334,26 @@ LinkedList LinkedList::regexSearch(string text) const
     return list;
 }
 
+LinkedList LinkedList::regexSearchPhone(string phone) const
+{
+    
+    regex reg(phone + ".*");
+	
+	
+	Node* ptr = first;
+	LinkedList list;
+	while (ptr != 0)
+	{
+		string s = ptr->data.getPhone();
+		if (regex_match(s, reg)) {
+			list.sortedInsert(ptr->data);
+		}
+		ptr = ptr->next;
+	}
+	return list;
+
+}
+
 
 // Function to insert a new node then sort.
 void LinkedList::sortedInsert(ElementType data){

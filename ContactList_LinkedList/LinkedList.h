@@ -47,6 +47,7 @@ public:
     bool contactExists(string name);
     bool phoneExists(string phone);
     LinkedList regexSearch(string text) const;
+    LinkedList regexSearchPhone(string phone) const;
     void sortedInsert(ElementType data);
     friend istream& operator>>(istream& in, LinkedList& aList);
 
