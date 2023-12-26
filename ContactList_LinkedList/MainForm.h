@@ -309,27 +309,6 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	textBox1->Text = "";
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (!(textBox1->Text == "")) {
-
-		if (isdigit(textBox1->Text[0])) {
-			ContactsListBox->Items->Clear();
-			string phone = msclr::interop::marshal_as<std::string>(textBox1->Text);
-			LinkedList list;
-			list.read();
-			LinkedList regexList;
-			regexList = list.regexSearchPhone(phone);
-			LinkedList::Node* ptr = regexList.first;
-
-			int i = 0;
-
-			// Add first name and last name of each contact to the list box.
-			while (ptr != NULL) {
-				ContactsListBox->Items->Insert(i++, gcnew String((ptr->data.getFirstName() + " " + ptr->data.getLastName()).c_str()));
-				ptr = ptr->next;
-			}
-			return;
-		}
-	}
 	ContactsListBox->Items->Clear();
 	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
 	searchedName = textBox1->Text;
