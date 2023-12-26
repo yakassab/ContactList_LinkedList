@@ -313,20 +313,27 @@ bool LinkedList::phoneExists(string phone)
 
 LinkedList LinkedList::regexSearch(string text) const
 {
-    
+
+    if (text[0] == '+') {
+        text.erase(0, 1);
+    }
+
     if (regex_match(text, regex("[0-9]+"))) {
+        if (text[0] == '2') {
+            text.erase(0, 1);
+        }
         regex reg(text + ".*");
-		Node* ptr = first;
-		LinkedList list;
-		while (ptr != 0)
-		{
-			if (regex_match(ptr->data.getPhone(), reg)) {
-				list.sortedInsert(ptr->data);
-			}
-			ptr = ptr->next;
-		}
-		return list;
-	}
+        Node* ptr = first;
+        LinkedList list;
+        while (ptr != 0)
+        {
+            if (regex_match(ptr->data.getPhone(), reg)) {
+                list.sortedInsert(ptr->data);
+            }
+            ptr = ptr->next;
+        }
+        return list;
+    }
 
     regex reg(".*" + text + ".*");
 
@@ -340,7 +347,7 @@ LinkedList LinkedList::regexSearch(string text) const
         string s2 = ptr->data.getLastName();
         s2[0] = tolower(s2[0]);
         string s = s1 + " " + s2;
-        if (regex_match(s, reg)){
+        if (regex_match(s, reg)) {
             list.sortedInsert(ptr->data);
         }
         ptr = ptr->next;
