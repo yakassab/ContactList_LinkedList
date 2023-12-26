@@ -313,6 +313,38 @@ bool LinkedList::phoneExists(string phone)
 
 LinkedList LinkedList::regexSearch(string text) const
 {
+    //this funciton gives an exception if the user enters +20.
+//this is because the + is a special character in regex.
+//to fix this, we check if the user entered a number, and if so, we add .* to the end of the number.
+//this way, the regex will match any number that starts with the number the user entered.
+
+
+
+    if (text[0] == '+') {
+    	// remove the + from the string.
+        text.erase(0, 1);
+    }
+    
+
+
+    
+    if (regex_match(text, regex("[0-9]+"))) {
+        if (text[0] == '2') {
+            text.erase(0, 1);
+        }
+
+        regex reg(text + ".*");
+		Node* ptr = first;
+		LinkedList list;
+		while (ptr != 0)
+		{
+			if (regex_match(ptr->data.getPhone(), reg)) {
+				list.sortedInsert(ptr->data);
+			}
+			ptr = ptr->next;
+		}
+		return list;
+	}
 
     regex reg(".*" + text + ".*");
 

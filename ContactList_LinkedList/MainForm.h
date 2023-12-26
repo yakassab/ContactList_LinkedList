@@ -309,6 +309,14 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	textBox1->Text = "";
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
+	// check if textbox starts with +20
+//if (textBox1->Text->StartsWith("+")) {
+//	return;
+//	}
+
+
+	
 	ContactsListBox->Items->Clear();
 	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
 	searchedName = textBox1->Text;
