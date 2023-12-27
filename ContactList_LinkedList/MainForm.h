@@ -3,7 +3,7 @@
 #include "Contact.h"
 #include "addForm.h"
 #include "DetailsForm.h"
-#include "SearchForm.h"
+#include <regex>
 #include <msclr\marshal_cppstd.h>
 namespace ContactListLinkedList {
 
@@ -230,11 +230,7 @@ namespace ContactListLinkedList {
 
 	
 	
-	private: System::Void searchButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		SearchForm^ form = gcnew SearchForm();
-		form->ShowDialog();
-
-	}
+	
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		//write code to move from one form to another
 		addForm^ form = gcnew addForm(this, "add");
@@ -310,15 +306,16 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 
-	// check if textbox starts with +20
-//if (textBox1->Text->StartsWith("+")) {
-//	return;
-//	}
+	
 
 
 	
 	ContactsListBox->Items->Clear();
 	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
+	// remove anything that isnt a digit or a + sign or a letter from name.
+	regex reg("[^0-9a-zA-Z+]");
+	name = regex_replace(name, reg, "");
+
 	searchedName = textBox1->Text;
 	LinkedList list;
 	list.read();
