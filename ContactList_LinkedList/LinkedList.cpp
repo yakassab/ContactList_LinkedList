@@ -233,7 +233,7 @@ void LinkedList::read()
 void  LinkedList::write() const {
     ofstream myFileDelete("contactstest.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
     myFileDelete.close();
-    ofstream myFileSave("contactstest.txt", ios::app); //saves data to file
+    ofstream myFileSave("contactstest.txt", ios::app | ios::binary); //saves data to file
     NodePointer temp = first;
     for (int x = 0; x < mySize; x++) {
         myFileSave << temp->data;
