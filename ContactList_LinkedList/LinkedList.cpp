@@ -213,7 +213,7 @@ void LinkedList::read()
 {
     string firstName, lastName, email, phone, address;
     int count = 0;
-    ifstream myFile("contactstest.txt");
+    ifstream myFile("Contacts.bin");
     if (myFile.is_open()) {
         while ((myFile.peek()) != EOF) {
             getline(myFile, firstName);
@@ -231,9 +231,9 @@ void LinkedList::read()
 
 //save data
 void  LinkedList::write() const {
-    ofstream myFileDelete("contactstest.txt", std::ofstream::out | std::ofstream::trunc); //clears data in file
+    ofstream myFileDelete("Contacts.bin", std::ofstream::out | std::ofstream::trunc); //clears data in file
     myFileDelete.close();
-    ofstream myFileSave("contactstest.txt", ios::app | ios::binary); //saves data to file
+    ofstream myFileSave("Contacts.bin", ios::app | ios::binary); //saves data to file
     NodePointer temp = first;
     for (int x = 0; x < mySize; x++) {
         myFileSave << temp->data;

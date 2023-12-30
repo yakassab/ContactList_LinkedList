@@ -201,7 +201,6 @@ namespace ContactListLinkedList {
 
 		// Read the list from the file.
 		list.read();
-		list.sort();
 
 		// Create a ptr that points to the first node of the list.
 		LinkedList::NodePointer ptr = list.first;
@@ -213,7 +212,6 @@ namespace ContactListLinkedList {
 			ptr = ptr->next;
 		}
 
-		list.write();
 		
 	}
 
@@ -298,9 +296,12 @@ private: System::Void textBox1_TextChanged(System::Object^ sender, System::Event
 	
 	ContactsListBox->Items->Clear();
 	string name = msclr::interop::marshal_as<std::string>(textBox1->Text);
-	// remove anything that isnt a digit or a + sign or a letter from name.
-	regex reg("[^0-9a-zA-Z+]");
-	name = regex_replace(name, reg, "");
+
+	// Removes anything that isnt a digit or a + sign or a letter or a space from name.
+	regex r("[^0-9a-zA-Z\\s\\+]");
+	name = regex_replace(name, r, "");
+
+	
 
 	searchedName = textBox1->Text;
 	LinkedList list;
@@ -316,7 +317,7 @@ private: System::Void textBox1_TextChanged(System::Object^ sender, System::Event
 			ptr = ptr->next;
 		}
 	}
-	else {
+	else{
 
 		LinkedList regexList;
 		regexList = list.regexSearch(name);
