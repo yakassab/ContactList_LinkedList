@@ -201,7 +201,7 @@ namespace ContactListLinkedList {
 
 		// Read the list from the file.
 		list.read();
-
+		list.sort();
 		// Create a ptr that points to the first node of the list.
 		LinkedList::NodePointer ptr = list.first;
 		int i = 0;
@@ -212,7 +212,6 @@ namespace ContactListLinkedList {
 			ptr = ptr->next;
 		}
 
-		
 	}
 
 
