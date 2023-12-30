@@ -55,12 +55,7 @@ namespace ContactListLinkedList {
 
 
 
-	protected:
-
-	protected:
-
-
-	protected:
+	
 
 	private:
 		/// <summary>
