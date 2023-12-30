@@ -319,7 +319,7 @@ namespace ContactListLinkedList {
 private: System::Void deleteButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	LinkedList list;
 	list.read();
-	list.sort();
+
 
 if (MessageBox::Show("Are you sure you want to delete this contact?", "Delete Contact", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::No)
 	return;

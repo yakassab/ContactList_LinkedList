@@ -454,7 +454,7 @@ namespace ContactListLinkedList {
 	private: System::Void btn_save_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (mode == "add") {
 			string name = msclr::interop::marshal_as<std::string>(tb_firstname->Text) + " " + msclr::interop::marshal_as<std::string>(tb_lastname->Text);
-			// make first letter of first name and last name capital.
+			// makes first letter of first name and last name capital.
 			name[0] = toupper(name[0]);
 			int i = 0;
 			while (name[i] != ' ') { i++; }
@@ -534,7 +534,6 @@ namespace ContactListLinkedList {
 			else {
 				list.sortedInsert(Contact(msclr::interop::marshal_as<std::string>(tb_firstname->Text), msclr::interop::marshal_as<std::string>(tb_lastname->Text), msclr::interop::marshal_as<std::string>(tb_phoneNumber->Text), msclr::interop::marshal_as<std::string>(tb_email->Text), msclr::interop::marshal_as<std::string>(address)));
 			}
-			list.sort();
 			list.write();
 
 
@@ -690,7 +689,7 @@ namespace ContactListLinkedList {
 		if (tb_phoneNumber->Text->Length == 0) {
 			counterLabel->Text = "";
 		}
-		// Make label show how many chars are written.
+		// Makes label show how many chars are written.
 		counterLabel->Text = tb_phoneNumber->Text->Length.ToString();
 
 
