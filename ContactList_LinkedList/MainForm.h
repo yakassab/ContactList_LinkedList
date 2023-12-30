@@ -201,13 +201,6 @@ namespace ContactListLinkedList {
 
 		// Read the list from the file.
 		list.read();
-		//list.erase(0);
-		//list.insert(Contact("youssef", "kassab", "01206437599", "ahmedd@gmail.com", "new York"),0);
-
-		//list.erase("", "");
-		//list.erase(1);
-		
-		// Sort the list.
 		list.sort();
 
 		// Create a ptr that points to the first node of the list.
@@ -220,9 +213,6 @@ namespace ContactListLinkedList {
 			ptr = ptr->next;
 		}
 
-
-		
-		
 		list.write();
 		
 	}
@@ -232,13 +222,10 @@ namespace ContactListLinkedList {
 	
 	
 	private: System::Void addButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		//write code to move from one form to another
 		addForm^ form = gcnew addForm(this, "add");
 		form->ShowDialog();
 		LinkedList list;
 		list.read();
-
-		// Sort the list.
 		list.sort();
 
 		// Create a ptr that points to the first node of the list.
@@ -253,17 +240,16 @@ namespace ContactListLinkedList {
 		}
 	}
 
-// write a function to update listbox after deleting a contact.
 
 	private: System::Void update_LB() {
 		LinkedList list1, list;
 		list1.read();
 		string n = msclr::interop::marshal_as<std::string>(textBox1->Text);
 		list = list1.regexSearch(n);
-		// Sort the list.
+		
 		
 
-		// Create a ptr that points to the first node of the list.
+		
 		LinkedList::NodePointer ptr = list.first;
 		int i = 0;
 
